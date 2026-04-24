@@ -1,10 +1,29 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\MoodController;
+use App\Http\Controllers\Api\StoryController;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/login', [AuthController::class, 'login']);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/me', function (Request $request) {
+        return response()->json([
+            'success' => true,
+            'user' => $request->user(),
+        ]);
+    });
+    Route::post('/logout', [AuthController::class, 'logout']);
+
+    Route::get('/moods', [MoodController::class, 'index']);
+    Route::post('/moods', [MoodController::class, 'store']);
+    Route::put('/moods/{id}', [MoodController::class, 'update']);
+    
+    Route::post('/stories', [StoryController::class, 'store']);
+});
 
 Route::get('/ping', function () {
     return response()->json([
