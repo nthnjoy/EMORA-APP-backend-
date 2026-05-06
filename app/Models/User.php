@@ -20,6 +20,14 @@ class User extends Authenticatable
         'username',
         'password',
         'nim',
+        'email',
+        'prodi',
+        'angkatan',
+        'asrama',
+        'jenis_kelamin',
+        'point',
+        'purchased_themes',
+        'active_theme',
     ];
 
     protected $hidden = [

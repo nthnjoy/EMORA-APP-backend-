@@ -77,6 +77,19 @@ class AuthController extends Controller
                 ], $httpStatus);
             }
             $cisUser = isset($cisData['user']) && is_array($cisData['user']) ? $cisData['user'] : [];
+            
+            $cisToken = $cisData['token'] ?? null;
+            $profile = $this->cisService->getMahasiswaProfile($credentials['username'], $cisToken);
+            
+            if ($profile) {
+                $cisUser['nim'] = $profile['nim'] ?? $cisUser['nim'] ?? null;
+                $cisUser['name'] = $profile['nama'] ?? $cisUser['name'] ?? null;
+                $cisUser['email'] = $profile['email'] ?? $cisUser['email'] ?? null;
+                $cisUser['prodi'] = $profile['prodi'] ?? $cisUser['prodi'] ?? null;
+                $cisUser['angkatan'] = $profile['tahun_masuk'] ?? $profile['angkatan'] ?? $cisUser['angkatan'] ?? null;
+                $cisUser['asrama'] = $profile['asrama'] ?? $cisUser['asrama'] ?? null;
+                $cisUser['jenis_kelamin'] = $profile['jenis_kelamin'] ?? null;
+            }
 
             try {
                 $user = User::updateOrCreate(
@@ -85,6 +98,11 @@ class AuthController extends Controller
                         'name'     => $cisUser['name'] ?? $cisUser['username'] ?? $credentials['username'],
                         'password' => Hash::make($credentials['password']),
                         'nim'      => $cisUser['nim'] ?? null,
+                        'email'    => $cisUser['email'] ?? null,
+                        'prodi'    => $cisUser['prodi'] ?? null,
+                        'angkatan' => $cisUser['angkatan'] ?? null,
+                        'asrama'   => $cisUser['asrama'] ?? null,
+                        'jenis_kelamin' => $cisUser['jenis_kelamin'] ?? null,
                     ]
                 );
 
@@ -173,5 +191,220 @@ class AuthController extends Controller
             'success' => true,
             'message' => 'Logout berhasil',
         ]);
+    }
+
+    public function updatePoints(Request $request)
+    {
+        try {
+            $request->validate([
+                'points' => 'required|integer',
+            ]);
+
+            $user = $request->user();
+            $targetId = $user->_id;
+
+            \Log::info("Update Poin Spesifik User: {$user->username}", [
+                'target_id' => (string) $targetId,
+                'points' => $request->points
+            ]);
+
+            // Gunakan table() yang lebih standar di Laravel untuk MongoDB
+            // Pastikan poin tidak pernah negatif
+            $affected = \Illuminate\Support\Facades\DB::connection('mongodb')
+                ->table('users')
+                ->where('_id', $targetId)
+                ->update(['point' => max(0, (int) $request->points)]);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Poin berhasil diperbarui',
+                'affected_rows' => $affected,
+                'user' => $user->fresh(),
+            ]);
+        } catch (Throwable $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal memperbarui poin: ' . $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function mahasiswa(Request $request)
+    {
+        $user = $request->user();
+
+        return response()->json([
+            'success' => true,
+            'result' => 'Ok',
+            'data' => [
+                'mahasiswa' => [
+                    [
+                        'dim_id' => $user->_id ?? null,
+                        'user_id' => $user->_id ?? null,
+                        'user_name' => $user->username,
+                        'nim' => $user->nim ?? null,
+                        'nama' => $user->name ?? null,
+                        'email' => $user->email ?? '',
+                        'prodi_id' => 1,
+                        'prodi_name' => $user->prodi ?? '',
+                        'fakultas' => 'Vokasi',
+                        'angkatan' => $user->angkatan ?? '',
+                        'status' => 'Aktif',
+                        'asrama' => $user->asrama ?? '',
+                        'jenis_kelamin' => $user->jenis_kelamin ?? '',
+                        'point' => $user->point ?? 0,
+                        'purchased_themes' => $user->purchased_themes ?? [],
+                        'active_theme' => $user->active_theme ?? 'default',
+                    ],
+                ],
+            ],
+        ]);
+    }
+
+    public function getMahasiswaByNim($nim)
+    {
+        $user = User::where('nim', $nim)->orWhere('username', $nim)->first();
+
+        // Jika tidak ada di lokal atau datanya tidak lengkap, tarik dari CIS
+        if (!$user || !$user->nim || !$user->prodi || !$user->jenis_kelamin) {
+            $profile = $this->cisService->getMahasiswaProfile($nim);
+            
+            if ($profile) {
+                $username = $user ? $user->username : ($profile['user_name'] ?? $nim);
+                $user = User::updateOrCreate(
+                    ['username' => $username],
+                    [
+                        'name' => $profile['nama'] ?? $profile['name'] ?? $username,
+                        'nim' => $profile['nim'] ?? null,
+                        'email' => $profile['email'] ?? null,
+                        'prodi' => $profile['prodi'] ?? null,
+                        'angkatan' => $profile['tahun_masuk'] ?? $profile['angkatan'] ?? null,
+                        'asrama' => $profile['asrama'] ?? null,
+                        'jenis_kelamin' => $profile['jenis_kelamin'] ?? null,
+                        'password' => $user ? $user->password : Hash::make('defaultpassword'),
+                    ]
+                );
+            }
+        }
+
+        if (!$user) {
+            return response()->json([
+                'result' => 'Error',
+                'message' => 'Mahasiswa tidak ditemukan'
+            ], 404);
+        }
+
+        return response()->json([
+            'result' => 'Ok',
+            'data' => [
+                'mahasiswa' => [
+                    [
+                        'dim_id' => $user->_id ?? 0,
+                        'user_id' => $user->_id ?? 0,
+                        'user_name' => $user->username,
+                        'nim' => $user->nim,
+                        'nama' => $user->name,
+                        'email' => $user->email ?? '',
+                        'prodi_id' => 1,
+                        'prodi_name' => $user->prodi ?? '',
+                        'fakultas' => 'Vokasi',
+                        'angkatan' => $user->angkatan ?? '',
+                        'status' => 'Aktif',
+                        'asrama' => $user->asrama ?? '',
+                        'jenis_kelamin' => $user->jenis_kelamin ?? '',
+                        'point' => $user->point ?? 0,
+                        'purchased_themes' => $user->purchased_themes ?? [],
+                        'active_theme' => $user->active_theme ?? 'default',
+                    ]
+                ]
+            ]
+        ]);
+    }
+    public function buyTheme(Request $request)
+    {
+        try {
+            $request->validate([
+                'theme_id' => 'required|string',
+                'cost' => 'required|integer|min:0',
+            ]);
+
+            $user = $request->user();
+            $currentPoints = (int) ($user->point ?? 0);
+
+            if ($currentPoints < $request->cost) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Poin tidak cukup untuk membeli tema ini.',
+                ], 400);
+            }
+
+            $purchasedThemes = (array) ($user->purchased_themes ?? []);
+            if (in_array($request->theme_id, $purchasedThemes)) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Tema sudah dimiliki.',
+                ], 400);
+            }
+
+            $purchasedThemes[] = $request->theme_id;
+
+            // Enforce points >= 0
+            $newPoints = max(0, $currentPoints - $request->cost);
+
+            \Illuminate\Support\Facades\DB::connection('mongodb')
+                ->table('users')
+                ->where('_id', $user->_id)
+                ->update([
+                    'point' => $newPoints,
+                    'purchased_themes' => $purchasedThemes,
+                    'active_theme' => $request->theme_id
+                ]);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Tema berhasil dibeli!',
+                'user' => $user->fresh(),
+            ]);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal membeli tema: ' . $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function setActiveTheme(Request $request)
+    {
+        try {
+            $request->validate([
+                'theme_id' => 'required|string',
+            ]);
+
+            $user = $request->user();
+            $purchasedThemes = (array) ($user->purchased_themes ?? []);
+
+            if (!in_array($request->theme_id, $purchasedThemes) && $request->theme_id !== 'default') {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Tema belum dibeli.',
+                ], 403);
+            }
+
+            \Illuminate\Support\Facades\DB::connection('mongodb')
+                ->table('users')
+                ->where('_id', $user->_id)
+                ->update(['active_theme' => $request->theme_id]);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Tema berhasil diterapkan.',
+                'user' => $user->fresh(),
+            ]);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal mengganti tema: ' . $e->getMessage(),
+            ], 500);
+        }
     }
 }

@@ -4,25 +4,23 @@ namespace App\Models;
 
 use MongoDB\Laravel\Eloquent\Model;
 
-class Mood extends Model
+class Feeling extends Model
 {
     protected $connection = 'mongodb';
-    protected $collection = 'moods';
-    protected $primaryKey = '_id';
-    protected $keyType = 'string';
+    protected $collection = 'feelings';
 
     protected $fillable = [
         'user_id',
         'nim',
         'username',
         'mood_id',
-        'mood_name',
-        'mood_code',
+        'feeling_id',
+        'feeling_name',
+        'feeling_code',
         'recorded_at',
     ];
 
     protected $casts = [
-        'mood_id' => 'integer',
         'recorded_at' => 'datetime',
     ];
 }

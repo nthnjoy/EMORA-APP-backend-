@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\MoodController;
 use App\Http\Controllers\Api\StoryController;
+use App\Http\Controllers\Api\AiController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -16,14 +17,27 @@ Route::middleware('auth:sanctum')->group(function () {
             'user' => $request->user(),
         ]);
     });
+    Route::get('/mahasiswa', [AuthController::class, 'mahasiswa']);
     Route::post('/logout', [AuthController::class, 'logout']);
 
     Route::get('/moods', [MoodController::class, 'index']);
     Route::post('/moods', [MoodController::class, 'store']);
     Route::put('/moods/{id}', [MoodController::class, 'update']);
-    
+
+    Route::get('/stories', [StoryController::class, 'index']);
     Route::post('/stories', [StoryController::class, 'store']);
+    Route::post('/user/update-points', [AuthController::class, 'updatePoints']);
+    Route::post('/user/buy-theme', [AuthController::class, 'buyTheme']);
+    Route::post('/user/set-active-theme', [AuthController::class, 'setActiveTheme']);
+
+    // AI Engine Routes
+    Route::get('/ai/status', [AiController::class, 'status']);
+    Route::post('/ai/chat', [AiController::class, 'chat']);
+    Route::get('/ai/recommend', [AiController::class, 'recommend']);
 });
+
+Route::get('/mahasiswa/{nim}', [AuthController::class, 'getMahasiswaByNim']);
+Route::get('/student/{nim}', [AuthController::class, 'getMahasiswaByNim']);
 
 Route::get('/ping', function () {
     return response()->json([
