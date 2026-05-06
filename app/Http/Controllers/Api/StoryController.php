@@ -99,9 +99,14 @@ class StoryController extends Controller
 
             error_log("Story Saved to journal_texts with nim: " . $story->nim);
 
+            // 4. Get AI Feedback (Generate Popup Response)
+            $aiFeedback = $this->aiService->getChatResponse($nim, $payload['content']);
+            $feedbackMessage = $aiFeedback['reply'] ?? 'Cerita kamu sangat berharga. Terima kasih sudah berbagi!';
+
             return response()->json([
                 'success' => true,
                 'message' => 'Cerita kamu berhasil dikirim dan dianalisis oleh AI.',
+                'ai_feedback' => $feedbackMessage,
                 'data' => [
                     'id' => (string) $story->getKey(),
                     'nim' => $story->nim,

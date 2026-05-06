@@ -407,4 +407,31 @@ class AuthController extends Controller
             ], 500);
         }
     }
+
+    public function updateGender(Request $request)
+    {
+        try {
+            $request->validate([
+                'jenis_kelamin' => 'required|string|in:Laki-laki,Perempuan',
+            ]);
+
+            $user = $request->user();
+            
+            \Illuminate\Support\Facades\DB::connection('mongodb')
+                ->table('users')
+                ->where('_id', $user->_id)
+                ->update(['jenis_kelamin' => $request->jenis_kelamin]);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Jenis kelamin berhasil diperbarui',
+                'user' => $user->fresh(),
+            ]);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal memperbarui jenis kelamin: ' . $e->getMessage(),
+            ], 500);
+        }
+    }
 }

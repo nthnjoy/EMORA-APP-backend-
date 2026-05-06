@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\MoodController;
+use App\Models\MoodCategory;
+use App\Models\FeelingCategory;
 use App\Http\Controllers\Api\StoryController;
 use App\Http\Controllers\Api\AiController;
 use Illuminate\Support\Facades\DB;
@@ -29,6 +31,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/user/update-points', [AuthController::class, 'updatePoints']);
     Route::post('/user/buy-theme', [AuthController::class, 'buyTheme']);
     Route::post('/user/set-active-theme', [AuthController::class, 'setActiveTheme']);
+    Route::post('/user/update-gender', [AuthController::class, 'updateGender']);
 
     // AI Engine Routes
     Route::get('/ai/status', [AiController::class, 'status']);
