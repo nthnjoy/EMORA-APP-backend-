@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\DailyCheckin;
 use App\Models\Mood;
+use App\Models\Feeling;
 use Illuminate\Http\Request;
 
 class MoodController extends Controller
@@ -25,23 +27,37 @@ class MoodController extends Controller
         'Kesal' => 25, 'Jengkel' => 26, 'Benci' => 27, 'Kecewa' => 28,
     ];
 
+    protected $aiService;
+
+    public function __construct(\App\Services\AiService $aiService)
+    {
+        $this->aiService = $aiService;
+    }
+
     public function index(Request $request)
     {
         $user = $request->user();
 
-        $moods = Mood::query()
+        // Ambil data dari collection daily_checkins
+        $checkins = DailyCheckin::query()
             ->where('user_id', (string) $user->getKey())
             ->orderByDesc('recorded_at')
             ->orderByDesc('created_at')
             ->get();
 
-        // Ambil semua feeling terkait
-        $moodIds = $moods->pluck('_id')->map(fn($id) => (string) $id)->toArray();
-        $feelings = \App\Models\Feeling::whereIn('mood_id', $moodIds)->get()->keyBy('mood_id');
-
-        $data = $moods->map(function(Mood $mood) use ($feelings) {
-            $feeling = $feelings[(string) $mood->getKey()] ?? null;
-            return $this->transformMood($mood, $feeling);
+        $data = $checkins->map(function(DailyCheckin $checkin) {
+            return [
+                'id' => (string) $checkin->getKey(),
+                'user_id' => (string) ($checkin->user_id ?? ''),
+                'nim' => (string) ($checkin->nim ?? ''),
+                'username' => (string) ($checkin->username ?? ''),
+                'mood_label' => (string) ($checkin->mood_label ?? ''),
+                'perasaan' => (string) ($checkin->perasaan ?? ''),
+                'emosi_kode' => (int) ($checkin->mood_id ?? 0),
+                'recorded_at' => $checkin->recorded_at?->toISOString(),
+                'created_at' => $checkin->created_at?->toISOString(),
+                'updated_at' => $checkin->updated_at?->toISOString(),
+            ];
         })->values();
 
         return response()->json([
@@ -60,50 +76,55 @@ class MoodController extends Controller
             'recorded_at' => ['nullable', 'date'],
         ]);
 
-        // Debug log for checking incoming data
-        \Log::info('Incoming Mood Request:', ['user' => $user->id, 'payload' => $payload]);
-        error_log("Incoming Mood: " . json_encode($payload));
+        \Log::info('Incoming Daily Check-in Request:', ['user' => $user->id, 'payload' => $payload]);
 
         try {
-            $mood = new Mood();
-            $mood->user_id = (string) $user->getKey();
-            $mood->nim = $user->nim ?? '';
-            $mood->username = (string) ($user->username ?? '');
-            $mood->mood_name = $payload['mood_label'];
-            $mood->mood_code = strtoupper($payload['mood_label']);
-            $mood->mood_id = $payload['emosi_kode'];
-            $mood->recorded_at = $payload['recorded_at'] ?? now();
-            $mood->save();
+            $checkin = new DailyCheckin();
+            $checkin->user_id = (string) $user->getKey();
+            $checkin->nim = $user->nim ?? '';
+            $checkin->username = (string) ($user->username ?? '');
             
-            $feelingModel = null;
+            $checkin->mood_label = $payload['mood_label'];
+            $checkin->perasaan = $payload['perasaan'];
+            
+            // emosi_kode dipetakan ke mood_id
+            $checkin->mood_id = $payload['emosi_kode'];
+            
+            // feeling_id dipetakan dari feelingCodeMap
             if (!empty($payload['perasaan'])) {
-                $feelingModel = new \App\Models\Feeling();
-                $feelingModel->user_id = (string) $user->getKey();
-                $feelingModel->nim = $user->nim ?? '';
-                $feelingModel->username = (string) ($user->username ?? '');
-                $feelingModel->mood_id = (string) $mood->getKey();
-                $feelingModel->feeling_name = $payload['perasaan'];
-                $feelingModel->feeling_code = strtoupper($payload['perasaan']);
-                $feelingModel->feeling_id = $this->feelingCodeMap[$payload['perasaan']] ?? 0;
-                $feelingModel->recorded_at = $payload['recorded_at'] ?? now();
-                $feelingModel->save();
-                error_log("Feeling Saved to feelings ID: " . $feelingModel->getKey());
+                $checkin->feeling_id = $this->feelingCodeMap[$payload['perasaan']] ?? 0;
             }
+            
+            $checkin->recorded_at = $payload['recorded_at'] ?? now();
+            $checkin->save();
 
-            error_log("Mood Saved Successfully to " . $mood->getTable() . " ID: " . $mood->getKey());
+            \Log::info("Daily Check-in Saved Successfully. ID: " . $checkin->getKey());
+
+            // 3. Get AI Feedback (Recommender)
+            $nim = $user->nim ?? $user->username ?? 'Guest';
+            error_log("Calling AI Recommender for NIM: $nim, Mood: " . $payload['mood_label']);
+            $aiFeedback = $this->aiService->getRecommendation($nim, $payload['mood_label'], $payload['perasaan'] ?? null);
+            error_log("AI Recommender Response: " . json_encode($aiFeedback));
+            
+            $feedbackMessage = $aiFeedback['quote'] ?? 'Terima kasih sudah berbagi perasaanmu hari ini!';
 
             return response()->json([
                 'success' => true,
-                'message' => 'Mood dan Perasaan berhasil disimpan',
-                'data' => $this->transformMood($mood, $feelingModel),
+                'message' => 'Mood dan Perasaan berhasil disimpan ke Daily Check-ins',
+                'ai_feedback' => $feedbackMessage,
+                'data' => [
+                    'id' => (string) $checkin->getKey(),
+                    'mood_label' => $checkin->mood_label,
+                    'perasaan' => $checkin->perasaan,
+                    'recorded_at' => $checkin->recorded_at?->toISOString(),
+                ],
             ], 201);
         } catch (\Exception $e) {
-            \Log::error('Mood Save Error: ' . $e->getMessage());
-            error_log("Mood Save Error: " . $e->getMessage());
+            \Log::error('Daily Check-in Save Error: ' . $e->getMessage());
             
             return response()->json([
                 'success' => false,
-                'message' => 'Gagal menyimpan mood ke database.',
+                'message' => 'Gagal menyimpan mood ke Daily Check-ins.',
                 'error' => $e->getMessage(),
             ], 500);
         }
@@ -112,15 +133,15 @@ class MoodController extends Controller
     public function update(Request $request, string $id)
     {
         $user = $request->user();
-        $mood = Mood::query()
+        $checkin = DailyCheckin::query()
             ->where('_id', $id)
             ->where('user_id', (string) $user->getKey())
             ->first();
 
-        if (! $mood) {
+        if (! $checkin) {
             return response()->json([
                 'success' => false,
-                'message' => 'Data mood tidak ditemukan',
+                'message' => 'Data check-in tidak ditemukan',
             ], 404);
         }
 
@@ -132,45 +153,29 @@ class MoodController extends Controller
         ]);
 
         if (array_key_exists('mood_label', $payload)) {
-            $mood->mood_name = $payload['mood_label'];
-            $mood->mood_code = strtoupper($payload['mood_label']);
+            $checkin->mood_label = $payload['mood_label'];
+        }
+        if (array_key_exists('perasaan', $payload)) {
+            $checkin->perasaan = $payload['perasaan'];
         }
         if (array_key_exists('emosi_kode', $payload)) {
-            $mood->mood_id = $payload['emosi_kode'];
+            $checkin->mood_id = $payload['emosi_kode'];
         }
         if (array_key_exists('recorded_at', $payload)) {
-            $mood->recorded_at = $payload['recorded_at'];
+            $checkin->recorded_at = $payload['recorded_at'];
         }
-        $mood->save();
+        $checkin->save();
 
         return response()->json([
             'success' => true,
-            'message' => 'Mood berhasil diperbarui',
-            'data' => $this->transformMood($mood),
+            'message' => 'Check-in berhasil diperbarui',
+            'data' => [
+                'id' => (string) $checkin->getKey(),
+                'mood_label' => $checkin->mood_label,
+                'perasaan' => $checkin->perasaan,
+                'recorded_at' => $checkin->recorded_at?->toISOString(),
+            ],
         ]);
     }
 
-    private function transformMood(Mood $mood, $feeling = null): array
-    {
-        // Jika parameter feeling tidak di-passing, kita coba fetch dari collection feelings (fallback)
-        // Note: property perasaan lama (di collection mood) di-fallback juga agar data lama tetap muncul
-        if (!$feeling) {
-            $feeling = \App\Models\Feeling::where('mood_id', (string) $mood->getKey())->first();
-        }
-
-        $perasaanVal = $feeling ? ($feeling->feeling_name ?? $feeling->perasaan) : ($mood->perasaan ?? null);
-
-        return [
-            'id' => (string) $mood->getKey(),
-            'user_id' => (string) ($mood->user_id ?? ''),
-            'nim' => (string) ($mood->nim ?? ''),
-            'username' => (string) ($mood->username ?? ''),
-            'mood_label' => (string) ($mood->mood_name ?? $mood->mood_label ?? ''),
-            'perasaan' => $perasaanVal,
-            'emosi_kode' => (int) ($mood->mood_id ?? $mood->emosi_kode ?? 0),
-            'recorded_at' => $mood->recorded_at?->toISOString(),
-            'created_at' => $mood->created_at?->toISOString(),
-            'updated_at' => $mood->updated_at?->toISOString(),
-        ];
-    }
 }

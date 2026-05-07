@@ -20,19 +20,24 @@ class AiService
      */
     public function getChatResponse($nim, $text, $emotion = null)
     {
+        $url = "{$this->baseUrl}/api/generate-popup";
+        Log::info("Calling AI Chat Response: $url", ['nim' => $nim, 'text' => $text, 'emotion' => $emotion]);
+        
         try {
-            $response = Http::timeout(20)
-                ->post("{$this->baseUrl}/api/generate-popup", [
+            $response = Http::timeout(25)
+                ->post($url, [
                     'nim' => (string) $nim,
                     'text' => $text,
                     'emotion' => $emotion,
                 ]);
 
             if ($response->successful()) {
-                return $response->json();
+                $data = $response->json();
+                Log::info("AI Chat Response Success", ['data' => $data]);
+                return $data;
             }
 
-            Log::error("AI Engine Error (generate-popup): " . $response->body());
+            Log::error("AI Engine Error (generate-popup): Status " . $response->status() . " - " . $response->body());
             return ['status' => 'error', 'message' => 'AI Engine tidak merespon dengan benar'];
         } catch (Throwable $e) {
             Log::error("Koneksi AI Engine Gagal: " . $e->getMessage());
@@ -45,18 +50,24 @@ class AiService
      */
     public function getRecommendation($nim, $mood = null, $feeling = null)
     {
+        $url = "{$this->baseUrl}/api/recommend";
+        Log::info("Calling AI Recommendation: $url", ['nim' => $nim, 'mood' => $mood, 'feeling' => $feeling]);
+
         try {
-            $response = Http::timeout(10)
-                ->post("{$this->baseUrl}/api/recommend", [
+            $response = Http::timeout(15)
+                ->post($url, [
                     'nim' => (string) $nim,
                     'mood' => $mood,
                     'feeling' => $feeling,
                 ]);
 
             if ($response->successful()) {
-                return $response->json();
+                $data = $response->json();
+                Log::info("AI Recommendation Success", ['data' => $data]);
+                return $data;
             }
 
+            Log::error("AI Engine Error (recommend): Status " . $response->status() . " - " . $response->body());
             return ['status' => 'error', 'message' => 'Gagal mengambil rekomendasi'];
         } catch (Throwable $e) {
             Log::error("Koneksi AI Recommend Gagal: " . $e->getMessage());
