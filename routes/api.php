@@ -82,3 +82,7 @@ Route::get('/test-db', function () {
 Route::get('/login', function () {
     return response()->json(['message' => 'Unauthenticated.'], 401);
 })->name('login');
+
+Route::get('/health', function () {
+    return response()->json(['status' => 'ok']);
+});
