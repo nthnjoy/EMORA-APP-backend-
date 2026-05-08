@@ -91,19 +91,26 @@ class AuthController extends Controller
                 $cisUser['jenis_kelamin'] = $profile['jenis_kelamin'] ?? null;
             }
 
+            $updateData = [
+                'name'     => $cisUser['name'] ?? $cisUser['username'] ?? $credentials['username'],
+                'password' => Hash::make($credentials['password']),
+                'nim'      => $cisUser['nim'] ?? null,
+                'email'    => $cisUser['email'] ?? null,
+                'prodi'    => $cisUser['prodi'] ?? null,
+                'angkatan' => $cisUser['angkatan'] ?? null,
+                'asrama'   => $cisUser['asrama'] ?? null,
+            ];
+
+            // Hanya update jenis_kelamin jika data dari CIS tidak null
+            // Ini mencegah data lokal (yang diisi user di app) terhapus saat login ulang
+            if (isset($cisUser['jenis_kelamin']) && $cisUser['jenis_kelamin'] !== null) {
+                $updateData['jenis_kelamin'] = $cisUser['jenis_kelamin'];
+            }
+
             try {
                 $user = User::updateOrCreate(
                     ['username' => $credentials['username']],
-                    [
-                        'name'     => $cisUser['name'] ?? $cisUser['username'] ?? $credentials['username'],
-                        'password' => Hash::make($credentials['password']),
-                        'nim'      => $cisUser['nim'] ?? null,
-                        'email'    => $cisUser['email'] ?? null,
-                        'prodi'    => $cisUser['prodi'] ?? null,
-                        'angkatan' => $cisUser['angkatan'] ?? null,
-                        'asrama'   => $cisUser['asrama'] ?? null,
-                        'jenis_kelamin' => $cisUser['jenis_kelamin'] ?? null,
-                    ]
+                    $updateData
                 );
 
                 $token = $user->createToken('auth_token')->plainTextToken;
@@ -271,18 +278,23 @@ class AuthController extends Controller
             
             if ($profile) {
                 $username = $user ? $user->username : ($profile['user_name'] ?? $nim);
+                $updateData = [
+                    'name' => $profile['nama'] ?? $profile['name'] ?? $username,
+                    'nim' => $profile['nim'] ?? null,
+                    'email' => $profile['email'] ?? null,
+                    'prodi' => $profile['prodi'] ?? null,
+                    'angkatan' => $profile['tahun_masuk'] ?? $profile['angkatan'] ?? null,
+                    'asrama' => $profile['asrama'] ?? null,
+                    'password' => $user ? $user->password : Hash::make('defaultpassword'),
+                ];
+
+                if (isset($profile['jenis_kelamin']) && $profile['jenis_kelamin'] !== null) {
+                    $updateData['jenis_kelamin'] = $profile['jenis_kelamin'];
+                }
+
                 $user = User::updateOrCreate(
                     ['username' => $username],
-                    [
-                        'name' => $profile['nama'] ?? $profile['name'] ?? $username,
-                        'nim' => $profile['nim'] ?? null,
-                        'email' => $profile['email'] ?? null,
-                        'prodi' => $profile['prodi'] ?? null,
-                        'angkatan' => $profile['tahun_masuk'] ?? $profile['angkatan'] ?? null,
-                        'asrama' => $profile['asrama'] ?? null,
-                        'jenis_kelamin' => $profile['jenis_kelamin'] ?? null,
-                        'password' => $user ? $user->password : Hash::make('defaultpassword'),
-                    ]
+                    $updateData
                 );
             }
         }

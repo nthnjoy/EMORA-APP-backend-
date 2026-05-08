@@ -1,0 +1,112 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use App\Models\Module;
+
+class ModuleSeeder extends Seeder
+{
+    public function run()
+    {
+        $modules = [
+            [
+                'title' => 'Mengenal Kesehatan Mental',
+                'subtitle' => 'Dasar-dasar kesejahteraan emosional.',
+                'content' => "Kesehatan mental adalah keadaan sejahtera di mana individu menyadari potensinya, dapat mengatasi tekanan hidup yang normal, dapat bekerja secara produktif, dan mampu memberikan kontribusi kepada komunitasnya. Ini bukan sekadar tidak adanya gangguan mental.\n\nTips hari ini: Luangkan 5 menit untuk sekadar bernapas dan menyadari apa yang Anda rasakan tanpa menghakimi diri sendiri.",
+                'icon' => '🧠',
+                'points' => 30,
+                'category' => 'Edukasi',
+                'color' => '0xFF6366F1'
+            ],
+            [
+                'title' => 'Kesehatan Mental Mahasiswa',
+                'subtitle' => 'Tantangan unik di dunia perkuliahan.',
+                'content' => "Mahasiswa sering menghadapi tekanan akademik, ekspektasi sosial, dan perubahan fase hidup. Menurut penelitian, kecemasan dan stres adalah tantangan paling umum. Menyadari bahwa Anda tidak sendirian adalah langkah pertama menuju pemulihan.\n\nIngat: Nilai ujian tidak mendefinisikan harga diri Anda sebagai manusia.",
+                'icon' => '🎓',
+                'points' => 30,
+                'category' => 'Mahasiswa',
+                'color' => '0xFF10B981'
+            ],
+            [
+                'title' => 'Cara Menjaga Mental Tetap Terjaga',
+                'subtitle' => 'Strategi praktis untuk hari-hari sibuk.',
+                'content' => "Menjaga rutinitas tidur, asupan nutrisi yang baik, dan aktivitas fisik ringan sangat berpengaruh pada kestabilan mood. Jangan ragu untuk mengatakan \"tidak\" pada aktivitas yang menguras energi Anda secara berlebihan.\n\nPrinsip: Self-care is not selfish, it is necessary.",
+                'icon' => '🛡️',
+                'points' => 30,
+                'category' => 'Tips',
+                'color' => '0xFFF59E0B'
+            ],
+            [
+                'title' => 'Mengelola Stres Akademik',
+                'subtitle' => 'Menghadapi tugas dan ujian dengan tenang.',
+                'content' => "Stres akademik bisa dikelola dengan teknik manajemen waktu seperti Pomodoro dan membagi tugas besar menjadi langkah-langkah kecil. Jangan biarkan tumpukan tugas membuat Anda lumpuh.\n\nLatihan: Tulis 3 tugas prioritas hari ini saja, lupakan sisanya untuk sementara.",
+                'icon' => '📚',
+                'points' => 30,
+                'category' => 'Manajemen',
+                'color' => '0xFFEF4444'
+            ],
+            [
+                'title' => 'Mood dan Pengaruh Lingkungan',
+                'subtitle' => 'Bagaimana sekitar kita memengaruhi perasaan.',
+                'content' => "Warna, pencahayaan, dan orang-orang di sekitar Anda memengaruhi kondisi mental secara bawah sadar. Ruangan yang rapi cenderung memberikan ketenangan pikiran.\n\nAction: Rapikan satu sudut kecil di meja belajarmu sekarang.",
+                'icon' => '🌍',
+                'points' => 30,
+                'category' => 'Mood',
+                'color' => '0xFF06B6D4'
+            ],
+            [
+                'title' => 'Pentingnya Istirahat Berkualitas',
+                'subtitle' => 'Bukan sekadar tidur, tapi pemulihan.',
+                'content' => "Otak membutuhkan waktu untuk memproses informasi dan membuang racun sisa metabolisme. Kurang tidur berkorelasi langsung dengan penurunan mood dan fokus.\n\nKomitmen: Matikan layar 30 menit sebelum waktu tidur malam ini.",
+                'icon' => '💤',
+                'points' => 30,
+                'category' => 'Fisik',
+                'color' => '0xFF475569'
+            ],
+            [
+                'title' => 'Membangun Resiliensi',
+                'subtitle' => 'Bangkit dari kegagalan dan tantangan.',
+                'content' => "Resiliensi adalah kemampuan untuk beradaptasi dan bangkit kembali dari kesulitan. Ini bisa dilatih dengan mengubah pola pikir dari \"Kenapa ini terjadi padaku?\" menjadi \"Apa yang bisa aku pelajari dari ini?\".\n\nAfirmasi: Saya memiliki kekuatan untuk melewati tantangan ini.",
+                'icon' => '🌱',
+                'points' => 30,
+                'category' => 'Mindset',
+                'color' => '0xFF8B5CF6'
+            ],
+            [
+                'title' => 'Sosialisasi dan Koneksi Manusia',
+                'subtitle' => 'Dukungan sosial sebagai pelindung mental.',
+                'content' => "Berbicara dengan teman atau orang kepercayaan dapat menurunkan kadar kortisol (hormon stres). Koneksi manusia adalah salah satu prediktor kebahagiaan yang paling kuat.\n\nTugas: Hubungi satu teman lama atau keluarga hanya untuk menyapa.",
+                'icon' => '🤝',
+                'points' => 30,
+                'category' => 'Sosial',
+                'color' => '0xFFEC4899'
+            ],
+            [
+                'title' => 'Mengenali Tanda Burnout',
+                'subtitle' => 'Kapan harus berhenti sejenak.',
+                'content' => "Burnout adalah kelelahan emosional, fisik, dan mental akibat stres berkepanjangan. Tandanya termasuk sinisme, rasa tidak kompeten, dan kelelahan kronis.\n\nSaran: Jika Anda merasa burnout, istirahatlah total selama satu hari tanpa rasa bersalah.",
+                'icon' => '🔥',
+                'points' => 30,
+                'category' => 'Peringatan',
+                'color' => '0xFFEA580C'
+            ],
+            [
+                'title' => 'Mindfulness dalam Keseharian',
+                'subtitle' => 'Hadir sepenuhnya di sini dan saat ini.',
+                'content' => "Mindfulness berarti memperhatikan momen saat ini tanpa menghakimi. Ini membantu mengurangi kecemasan tentang masa depan dan penyesalan tentang masa lalu.\n\nLatihan: Rasakan tekstur air dan sabun saat Anda mencuci tangan hari ini.",
+                'icon' => '🧘',
+                'points' => 30,
+                'category' => 'Mental',
+                'color' => '0xFF14B8A6'
+            ]
+        ];
+
+        // Kosongkan collection terlebih dahulu
+        Module::truncate();
+
+        foreach ($modules as $module) {
+            Module::create($module);
+        }
+    }
+}

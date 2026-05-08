@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\MoodController;
+use App\Http\Controllers\Api\ModuleController;
 use App\Models\MoodCategory;
 use App\Models\FeelingCategory;
 use App\Http\Controllers\Api\StoryController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\Api\AiController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 
 Route::post('/login', [AuthController::class, 'login']);
 
@@ -28,6 +30,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/stories', [StoryController::class, 'index']);
     Route::post('/stories', [StoryController::class, 'store']);
+    Route::get('/modules', [ModuleController::class, 'index']);
+    Route::post('/modules/{id}/upload', [ModuleController::class, 'upload']);
+
     Route::post('/user/update-points', [AuthController::class, 'updatePoints']);
     Route::post('/user/buy-theme', [AuthController::class, 'buyTheme']);
     Route::post('/user/set-active-theme', [AuthController::class, 'setActiveTheme']);
@@ -41,6 +46,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::get('/mahasiswa/{nim}', [AuthController::class, 'getMahasiswaByNim']);
 Route::get('/student/{nim}', [AuthController::class, 'getMahasiswaByNim']);
+
+Route::get('/modules/view-pdf/{path}', [ModuleController::class, 'viewPdf'])->where('path', '.*');
 
 Route::get('/ping', function () {
     return response()->json([
