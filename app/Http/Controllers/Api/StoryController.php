@@ -7,6 +7,7 @@ use App\Models\Story;
 use App\Models\Mood;
 use App\Services\AiService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Carbon\Carbon;
 
 class StoryController extends Controller
@@ -29,7 +30,7 @@ class StoryController extends Controller
             ->map(fn (Story $story) => [
                 'id' => (string) $story->getKey(),
                 'nim' => $story->nim,
-                'content' => $story->description ?? '', // Frontend expects content
+                'content' => $this->safeDecrypt($story->description ?? ''), // Decrypt for frontend
                 'created_at' => $story->created_at?->toISOString(),
                 'updated_at' => $story->updated_at?->toISOString(),
             ])
@@ -85,7 +86,8 @@ class StoryController extends Controller
 
             $story = new Story();
             $story->nim = $nim;
-            $story->description = $payload['content']; // Strict match with ML schema
+            // Encrypt the journal content before saving to database
+            $story->description = Crypt::encryptString($payload['content']);
 
             // Save AI Results if successful
             if (isset($aiResult['status']) && $aiResult['status'] === 'success') {
@@ -110,7 +112,7 @@ class StoryController extends Controller
                 'data' => [
                     'id' => (string) $story->getKey(),
                     'nim' => $story->nim,
-                    'content' => $story->description, // Frontend expects content
+                    'content' => $payload['content'], // Return original plain text to Flutter (not encrypted)
                     'created_at' => $story->created_at?->toISOString(),
                 ],
             ], 201);
@@ -123,6 +125,21 @@ class StoryController extends Controller
                 'message' => 'Gagal menyimpan cerita ke database.',
                 'error' => $e->getMessage(),
             ], 500);
+        }
+    }
+
+    /**
+     * Safely decrypt a value. Returns original value if it was not encrypted
+     * (for backward compatibility with old plain-text data).
+     */
+    private function safeDecrypt(string $value): string
+    {
+        if (empty($value)) return $value;
+        try {
+            return Crypt::decryptString($value);
+        } catch (\Exception) {
+            // Data lama yang belum terenkripsi — kembalikan apa adanya
+            return $value;
         }
     }
 }
