@@ -11,24 +11,41 @@ class ModuleController extends Controller
 {
     public function index()
     {
-        $modules = Module::all()->map(function ($module) {
+        // Tangani jika status disimpan sebagai boolean true, integer 1, atau string "1"
+        $modules = Module::whereIn('status', [true, 1, '1'])->get()->map(function ($module) {
             $data = $module->toArray();
 
-            // Gunakan API route untuk content_url agar terhindar dari masalah 403
+            // Tangani content_url: jika sudah URL lengkap (Cloudinary), langsung pakai
             if (!empty($data['content_url'])) {
                 if (!str_starts_with($data['content_url'], 'http')) {
-                    // Path di DB: modules/content/xxx.pdf
-                    // Jadi URL: http://.../api/modules/view-pdf/modules/content/xxx.pdf
+                    // Path lokal lama: modules/content/xxx.pdf
                     $data['content_url'] = url('api/modules/view-pdf/' . $data['content_url']);
                 }
+                // Jika sudah 'http...', langsung dipakai (URL Cloudinary)
             }
 
-            // Thumbnail biasanya gambar, tetap pakai storage/ (jika gambar OK)
-            if (!empty($data['thumbnail_url'])) {
-                if (!str_starts_with($data['thumbnail_url'], 'http')) {
-                    $data['thumbnail_url'] = url('storage/' . $data['thumbnail_url']);
+            // Field 'thumbnail' digunakan oleh TA-KEL-12 (bukan 'thumbnail_url')
+            // Normalkan ke 'thumbnail_url' agar Flutter bisa membacanya
+            $thumbValue = $data['thumbnail'] ?? $data['thumbnail_url'] ?? null;
+            if (!empty($thumbValue)) {
+                if (!str_starts_with($thumbValue, 'http')) {
+                    // Path lokal lama
+                    $data['thumbnail_url'] = url('storage/' . $thumbValue);
+                } else {
+                    // URL Cloudinary atau URL eksternal, langsung pakai
+                    $data['thumbnail_url'] = $thumbValue;
                 }
+            } else {
+                $data['thumbnail_url'] = null;
             }
+
+            // Pemetaan field dari backend TA-KEL-12 ke format yang diharapkan Flutter
+            $data['points'] = $data['points'] ?? $data['reward_point'] ?? 0;
+            $data['category'] = $data['category'] ?? $data['kategori'] ?? 'Umum';
+            $data['subtitle'] = $data['subtitle'] ?? $data['target_audiens'] ?? '';
+            $data['content'] = $data['content'] ?? $data['description'] ?? '';
+            $data['icon'] = $data['icon'] ?? '🧩';
+            $data['color'] = $data['color'] ?? '0xFF6366F1';
 
             return $data;
         });

@@ -12,12 +12,21 @@ class Module extends Model
     protected $fillable = [
         'title',
         'subtitle',
+        'description',
         'content',
         'icon',
         'points',
+        'reward_point',
         'category',
+        'kategori',
         'color',
+        'status',
         'content_url',
-        'thumbnail_url',
+        'thumbnail',      // field yg dipakai TA-KEL-12
+        'thumbnail_url',  // field lama
+    ];
+
+    protected $casts = [
+        'status' => 'boolean',
     ];
 }
