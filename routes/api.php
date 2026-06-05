@@ -60,7 +60,7 @@ Route::get('/test-db', function () {
     try {
         DB::connection('mongodb')->command(['ping' => 1]);
 
-        return response()->json([
+        return respon  ()->json([
             'success' => true,
             'message' => 'Koneksi MongoDB Atlas Sukses!',
         ]);
