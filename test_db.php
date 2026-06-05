@@ -1,19 +1,6 @@
 <?php
-
 require 'vendor/autoload.php';
-
-$app = require 'bootstrap/app.php';
-
-$kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
-$kernel->bootstrap();
-
-try {
-    \Illuminate\Support\Facades\DB::connection('mongodb')->command(['ping' => 1]);
-    echo "✅ Koneksi MongoDB ke database 'monitoring' BERHASIL!\n";
-    exit(0);
-} catch (Throwable $e) {
-    echo "❌ Koneksi MongoDB GAGAL:\n";
-    echo "Error: " . $e->getMessage() . "\n";
-    exit(1);
-}
-?>
+$client = new MongoDB\Client('mongodb+srv://admin:monitoring2026@cluster0.jc0f5ag.mongodb.net/monitoring?retryWrites=true&w=majority&appName=Cluster0&authSource=admin');
+$col = $client->monitoring->modules;
+$docs = iterator_to_array($col->find());
+echo json_encode($docs, JSON_PRETTY_PRINT);

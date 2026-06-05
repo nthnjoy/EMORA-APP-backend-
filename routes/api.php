@@ -7,6 +7,7 @@ use App\Models\MoodCategory;
 use App\Models\FeelingCategory;
 use App\Http\Controllers\Api\StoryController;
 use App\Http\Controllers\Api\AiController;
+use App\Http\Controllers\Api\NotificationController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -42,6 +43,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/ai/status', [AiController::class, 'status']);
     Route::post('/ai/chat', [AiController::class, 'chat']);
     Route::get('/ai/recommend', [AiController::class, 'recommend']);
+
+    // Counselor Notification Routes
+    Route::get('/counselor/notifications', [NotificationController::class, 'index']);
+    Route::post('/counselor/notifications/{id}/read', [NotificationController::class, 'markAsRead']);
 });
 
 Route::get('/mahasiswa/{nim}', [AuthController::class, 'getMahasiswaByNim']);
