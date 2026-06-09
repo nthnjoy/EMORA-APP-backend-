@@ -205,6 +205,7 @@ class AuthController extends Controller
         try {
             $request->validate([
                 'points' => 'required|integer',
+                'completed_module_id' => 'nullable|string'
             ]);
 
             $user = $request->user();
@@ -212,15 +213,24 @@ class AuthController extends Controller
 
             \Log::info("Update Poin Spesifik User: {$user->username}", [
                 'target_id' => (string) $targetId,
-                'points' => $request->points
+                'points' => $request->points,
+                'module_id' => $request->completed_module_id
             ]);
 
-            // Gunakan table() yang lebih standar di Laravel untuk MongoDB
-            // Pastikan poin tidak pernah negatif
+            $updateData = ['point' => max(0, (int) $request->points)];
+            
+            if ($request->filled('completed_module_id')) {
+                $completedModules = (array) ($user->completed_modules ?? []);
+                if (!in_array($request->completed_module_id, $completedModules)) {
+                    $completedModules[] = $request->completed_module_id;
+                    $updateData['completed_modules'] = $completedModules;
+                }
+            }
+
             $affected = \Illuminate\Support\Facades\DB::connection('mongodb')
                 ->table('users')
                 ->where('_id', $targetId)
-                ->update(['point' => max(0, (int) $request->points)]);
+                ->update($updateData);
 
             return response()->json([
                 'success' => true,
@@ -260,6 +270,7 @@ class AuthController extends Controller
                         'asrama' => $user->asrama ?? '',
                         'jenis_kelamin' => $user->jenis_kelamin ?? '',
                         'point' => $user->point ?? 0,
+                        'completed_modules' => $user->completed_modules ?? [],
                         'purchased_themes' => $user->purchased_themes ?? [],
                         'active_theme' => $user->active_theme ?? 'default',
                     ],
@@ -325,6 +336,7 @@ class AuthController extends Controller
                         'asrama' => $user->asrama ?? '',
                         'jenis_kelamin' => $user->jenis_kelamin ?? '',
                         'point' => $user->point ?? 0,
+                        'completed_modules' => $user->completed_modules ?? [],
                         'purchased_themes' => $user->purchased_themes ?? [],
                         'active_theme' => $user->active_theme ?? 'default',
                     ]
