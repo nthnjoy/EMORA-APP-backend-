@@ -108,10 +108,41 @@ class MoodController extends Controller
             
             $feedbackMessage = $aiFeedback['quote'] ?? 'Terima kasih sudah berbagi perasaanmu hari ini!';
 
+            // 4. Fetch Mood History (Last 14 days) and check for predictive level 3
+            $recentMoods = DailyCheckin::where('user_id', (string) $user->getKey())
+                ->where('created_at', '>=', \Carbon\Carbon::now()->subDays(14))
+                ->orderBy('created_at', 'asc')
+                ->get()
+                ->map(fn($m) => [
+                    'mood' => $m->mood_label,
+                    'feeling' => $m->perasaan,
+                ])
+                ->toArray();
+
+            // Determine days since last journal
+            $lastJournal = \App\Models\Story::where('nim', $nim)->orderBy('created_at', 'desc')->first();
+            $daysSinceLastJournal = $lastJournal 
+                ? \Carbon\Carbon::now()->diffInDays($lastJournal->created_at) 
+                : 30;
+
+            // Call AI Classification to evaluate predictive level
+            $aiClassifyResult = $this->aiService->classifyText(
+                $nim,
+                '', // empty text
+                $recentMoods,
+                $daysSinceLastJournal
+            );
+
+            $aiLevel = 0;
+            if (isset($aiClassifyResult['status']) && $aiClassifyResult['status'] === 'success') {
+                $aiLevel = $aiClassifyResult['data']['level'] ?? 0;
+            }
+
             return response()->json([
                 'success' => true,
                 'message' => 'Mood dan Perasaan berhasil disimpan ke Daily Check-ins',
                 'ai_feedback' => $feedbackMessage,
+                'ai_level' => $aiLevel,
                 'data' => [
                     'id' => (string) $checkin->getKey(),
                     'mood_label' => $checkin->mood_label,

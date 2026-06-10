@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Story;
-use App\Models\Mood;
+use App\Models\DailyCheckin;
 use App\Services\AiService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -58,7 +58,7 @@ class StoryController extends Controller
             $nim = $user->nim ?? $user->username ?? 'Unknown';
 
             // 1. Fetch Mood History (Last 14 days) for AI Predictive
-            $recentMoods = Mood::where('user_id', (string) $user->getKey())
+            $recentMoods = DailyCheckin::where('user_id', (string) $user->getKey())
                 ->where('created_at', '>=', Carbon::now()->subDays(14))
                 ->orderBy('created_at', 'asc')
                 ->get()
@@ -109,6 +109,7 @@ class StoryController extends Controller
                 'success' => true,
                 'message' => 'Cerita kamu berhasil dikirim dan dianalisis oleh AI.',
                 'ai_feedback' => $feedbackMessage,
+                'ai_level' => $story->ai_level ?? 0,
                 'data' => [
                     'id' => (string) $story->getKey(),
                     'nim' => $story->nim,
