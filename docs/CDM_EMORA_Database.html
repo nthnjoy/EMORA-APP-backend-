@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CDM — EMORA App</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #E4E8EE; font-family: 'Segoe UI', Arial, sans-serif; overflow: hidden; }
+
+    .topbar {
+      background: linear-gradient(135deg, #1A3A5C 0%, #2C5282 100%);
+      color: white; padding: 12px 28px;
+      display: flex; justify-content: space-between; align-items: center;
+      box-shadow: 0 3px 10px #00000040;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 10;
+    }
+    .topbar h1 { font-size: 17px; font-weight: 700; letter-spacing: 0.5px; }
+    .topbar .sub { font-size: 11px; color: #90CDF4; margin-top: 3px; }
+    .topbar .meta { font-size: 10px; color: #7A9CC0; text-align: right; line-height: 1.7; }
+
+    .toolbar {
+      position: fixed; top: 68px; left: 0; right: 0; z-index: 10;
+      background: #152A42; padding: 6px 28px;
+      display: flex; gap: 6px; align-items: center;
+      border-bottom: 2px solid #1E3D5C;
+    }
+    .toolbar button {
+      background: #1E3D5C; color: #BEE3F8; border: 1px solid #3A7BBF;
+      padding: 4px 14px; border-radius: 4px; font-size: 11px; cursor: pointer;
+      transition: all 0.15s;
+    }
+    .toolbar button:hover { background: #3A7BBF; color: white; }
+    .toolbar .sep { width: 1px; height: 20px; background: #2D5986; margin: 0 4px; }
+    #zoom-pct { color: #90CDF4; font-size: 11px; min-width: 44px; text-align: center; }
+    .toolbar .info { margin-left: auto; color: #5A88B8; font-size: 10px; }
+
+    .canvas-area {
+      position: fixed;
+      top: 104px; left: 0; right: 0; bottom: 0;
+      overflow: auto;
+      padding: 24px;
+      background: #DDE3EC;
+      background-image: radial-gradient(circle, #B0BCCE 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    #svg-container {
+      display: inline-block;
+      transform-origin: top left;
+      transition: transform 0.15s ease;
+      box-shadow: 0 8px 32px #00000040;
+      border-radius: 4px;
+      background: white;
+    }
+    #svg-container img { display: block; }
+
+    @media print {
+      .topbar, .toolbar { display: none !important; }
+      .canvas-area {
+        position: static; overflow: visible; padding: 0;
+        background: white !important;
+        background-image: none !important;
+      }
+      #svg-container { transform: none !important; box-shadow: none; width: 100% !important; }
+      #svg-container img { width: 100% !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div>
+      <h1>📐 EMORA App — Conceptual Data Model (CDM)</h1>
+      <div class="sub">Relasi: One-to-Many &nbsp;|&nbsp; Notasi: Crow's Foot / PowerDesigner &nbsp;|&nbsp; Entities: 9</div>
+    </div>
+    <div class="meta">
+      Project: EMORA (Emotional Monitoring &amp; Reflective Activity)<br/>
+      Backend: Laravel 11 + MongoDB Atlas &nbsp;|&nbsp; © 2026
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <button onclick="zoomBy(1.25)">🔍 Zoom In</button>
+    <button onclick="zoomBy(0.8)">🔎 Zoom Out</button>
+    <div class="sep"></div>
+    <button onclick="setZoom(0.5)">50%</button>
+    <button onclick="setZoom(0.75)">75%</button>
+    <button onclick="setZoom(1)">100%</button>
+    <button onclick="setZoom(1.5)">150%</button>
+    <div class="sep"></div>
+    <button onclick="fitToScreen()">⊡ Fit Screen</button>
+    <div class="sep"></div>
+    <button onclick="window.print()">🖨️ Print / PDF</button>
+    <span id="zoom-pct">100%</span>
+    <span class="info">Scroll untuk navigasi · Ctrl+Scroll untuk zoom</span>
+  </div>
+
+  <div class="canvas-area" id="canvas">
+    <div id="svg-container">
+      <img src="CDM_EMORA_Database.svg" id="svgImg" width="1500" height="1080" alt="CDM EMORA"/>
+    </div>
+  </div>
+
+  <script>
+    let scale = 1;
+    const container = document.getElementById('svg-container');
+    const img = document.getElementById('svgImg');
+    const pct = document.getElementById('zoom-pct');
+
+    function applyZoom() {
+      container.style.transform = `scale(${scale})`;
+      container.style.width = (1500 * scale) + 'px';
+      container.style.height = (1080 * scale) + 'px';
+      pct.textContent = Math.round(scale * 100) + '%';
+    }
+
+    function zoomBy(f) { scale = Math.min(4, Math.max(0.25, scale * f)); applyZoom(); }
+    function setZoom(v) { scale = v; applyZoom(); }
+
+    function fitToScreen() {
+      const ca = document.getElementById('canvas');
+      const sw = ca.clientWidth - 48;
+      const sh = ca.clientHeight - 48;
+      scale = Math.min(sw / 1500, sh / 1080);
+      applyZoom();
+    }
+
+    // Ctrl+Wheel zoom
+    document.getElementById('canvas').addEventListener('wheel', function(e) {
+      if (e.ctrlKey) {
+        e.preventDefault();
+        zoomBy(e.deltaY < 0 ? 1.1 : 0.9);
+      }
+    }, { passive: false });
+
+    // Auto fit on load
+    window.addEventListener('load', fitToScreen);
+  </script>
+</body>
+</html>

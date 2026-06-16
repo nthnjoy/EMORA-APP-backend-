@@ -1,0 +1,730 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1200" viewBox="0 0 1600 1200" font-family="Segoe UI, Arial, sans-serif">
+
+  <!-- Background -->
+  <rect width="1600" height="1200" fill="#F0F4F8"/>
+
+  <!-- Grid pattern -->
+  <defs>
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#DDE3EA" stroke-width="0.5"/>
+    </pattern>
+    <!-- Drop shadow filter -->
+    <filter id="shadow" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="2" dy="3" stdDeviation="3" flood-color="#00000025"/>
+    </filter>
+    <!-- Arrow markers -->
+    <marker id="arrow-end" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4A6FA5"/>
+    </marker>
+    <marker id="arrow-start-one" markerWidth="10" markerHeight="10" refX="1" refY="5" orient="auto">
+      <line x1="1" y1="1" x2="1" y2="9" stroke="#4A6FA5" stroke-width="2"/>
+    </marker>
+    <marker id="arrow-start-many" markerWidth="10" markerHeight="10" refX="1" refY="5" orient="auto">
+      <text x="0" y="8" font-size="10" fill="#4A6FA5" font-weight="bold">∞</text>
+    </marker>
+  </defs>
+  <rect width="1600" height="1200" fill="url(#grid)"/>
+
+  <!-- ==================== TITLE ==================== -->
+  <rect x="20" y="14" width="560" height="44" rx="6" fill="#1A3A5C" filter="url(#shadow)"/>
+  <text x="300" y="42" text-anchor="middle" font-size="18" font-weight="bold" fill="white" letter-spacing="1">EMORA APP — Physical Data Model (PDM)</text>
+  <text x="1580" y="30" text-anchor="end" font-size="10" fill="#7A8EA8">Database: MongoDB Atlas  |  Backend: Laravel 11  |  Version: 1.0</text>
+  <text x="1580" y="44" text-anchor="end" font-size="10" fill="#7A8EA8">Generated: 2026  |  PowerDesigner-style</text>
+
+  <!-- ==================== LEGEND ==================== -->
+  <rect x="20" y="68" width="200" height="80" rx="6" fill="white" stroke="#C5D0DE" stroke-width="1" filter="url(#shadow)"/>
+  <text x="120" y="86" text-anchor="middle" font-size="11" font-weight="bold" fill="#1A3A5C">LEGEND</text>
+  <rect x="30" y="94" width="12" height="12" fill="#1A3A5C" rx="2"/>
+  <text x="48" y="104" font-size="10" fill="#333">PK  Primary Key (_id)</text>
+  <rect x="30" y="112" width="12" height="12" fill="#E8F0FE" rx="2" stroke="#4A6FA5" stroke-width="1"/>
+  <text x="48" y="122" font-size="10" fill="#333">FK  Foreign Key (ref)</text>
+  <line x1="30" y1="133" x2="80" y2="133" stroke="#4A6FA5" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="88" y="137" font-size="10" fill="#333">Soft Reference</text>
+
+  <!-- ==================== TABLE: users ==================== -->
+  <!-- Header -->
+  <rect x="60" y="180" width="260" height="30" rx="4 4 0 0" fill="#1A3A5C" filter="url(#shadow)"/>
+  <text x="190" y="200" text-anchor="middle" font-size="13" font-weight="bold" fill="white">users</text>
+  <text x="310" y="200" text-anchor="end" font-size="9" fill="#90A8C3">«document»</text>
+  <!-- Column header row -->
+  <rect x="60" y="210" width="260" height="20" fill="#2C5282"/>
+  <text x="72" y="224" font-size="9" font-weight="bold" fill="#BEE3F8">Column</text>
+  <text x="230" y="224" font-size="9" font-weight="bold" fill="#BEE3F8">Type</text>
+  <text x="305" y="224" text-anchor="end" font-size="9" font-weight="bold" fill="#BEE3F8">Constraint</text>
+  <!-- Rows -->
+  <rect x="60" y="230" width="260" height="18" fill="#1A3A5C"/>
+  <text x="72" y="243" font-size="9" fill="#FFD700" font-weight="bold">PK  _id</text>
+  <text x="230" y="243" font-size="9" fill="#E2E8F0">ObjectId</text>
+  <text x="305" y="243" text-anchor="end" font-size="9" fill="#90CDF4">NOT NULL</text>
+
+  <rect x="60" y="248" width="260" height="18" fill="white"/>
+  <text x="72" y="261" font-size="9" fill="#333">name</text>
+  <text x="230" y="261" font-size="9" fill="#555">String</text>
+  <text x="305" y="261" text-anchor="end" font-size="9" fill="#718096">NOT NULL</text>
+
+  <rect x="60" y="266" width="260" height="18" fill="#F7FAFC"/>
+  <text x="72" y="279" font-size="9" fill="#333">username</text>
+  <text x="230" y="279" font-size="9" fill="#555">String</text>
+  <text x="305" y="279" text-anchor="end" font-size="9" fill="#718096">UNIQUE</text>
+
+  <rect x="60" y="284" width="260" height="18" fill="white"/>
+  <text x="72" y="297" font-size="9" fill="#333">email</text>
+  <text x="230" y="297" font-size="9" fill="#555">String</text>
+  <text x="305" y="297" text-anchor="end" font-size="9" fill="#718096">UNIQUE</text>
+
+  <rect x="60" y="302" width="260" height="18" fill="#F7FAFC"/>
+  <text x="72" y="315" font-size="9" fill="#333">password</text>
+  <text x="230" y="315" font-size="9" fill="#555">String (hashed)</text>
+  <text x="305" y="315" text-anchor="end" font-size="9" fill="#718096">NOT NULL</text>
+
+  <rect x="60" y="320" width="260" height="18" fill="white"/>
+  <text x="72" y="333" font-size="9" fill="#333">nim</text>
+  <text x="230" y="333" font-size="9" fill="#555">String</text>
+  <text x="305" y="333" text-anchor="end" font-size="9" fill="#718096">INDEX</text>
+
+  <rect x="60" y="338" width="260" height="18" fill="#F7FAFC"/>
+  <text x="72" y="351" font-size="9" fill="#333">prodi</text>
+  <text x="230" y="351" font-size="9" fill="#555">String</text>
+  <text x="305" y="351" text-anchor="end" font-size="9" fill="#718096">nullable</text>
+
+  <rect x="60" y="356" width="260" height="18" fill="white"/>
+  <text x="72" y="369" font-size="9" fill="#333">angkatan</text>
+  <text x="230" y="369" font-size="9" fill="#555">String</text>
+  <text x="305" y="369" text-anchor="end" font-size="9" fill="#718096">nullable</text>
+
+  <rect x="60" y="374" width="260" height="18" fill="#F7FAFC"/>
+  <text x="72" y="387" font-size="9" fill="#333">asrama</text>
+  <text x="230" y="387" font-size="9" fill="#555">String</text>
+  <text x="305" y="387" text-anchor="end" font-size="9" fill="#718096">nullable</text>
+
+  <rect x="60" y="392" width="260" height="18" fill="white"/>
+  <text x="72" y="405" font-size="9" fill="#333">jenis_kelamin</text>
+  <text x="230" y="405" font-size="9" fill="#555">String</text>
+  <text x="305" y="405" text-anchor="end" font-size="9" fill="#718096">nullable</text>
+
+  <rect x="60" y="410" width="260" height="18" fill="#F7FAFC"/>
+  <text x="72" y="423" font-size="9" fill="#333">point</text>
+  <text x="230" y="423" font-size="9" fill="#555">Integer</text>
+  <text x="305" y="423" text-anchor="end" font-size="9" fill="#718096">default: 0</text>
+
+  <rect x="60" y="428" width="260" height="18" fill="white"/>
+  <text x="72" y="441" font-size="9" fill="#333">purchased_themes</text>
+  <text x="230" y="441" font-size="9" fill="#555">Array[String]</text>
+  <text x="305" y="441" text-anchor="end" font-size="9" fill="#718096">nullable</text>
+
+  <rect x="60" y="446" width="260" height="18" fill="#F7FAFC"/>
+  <text x="72" y="459" font-size="9" fill="#333">active_theme</text>
+  <text x="230" y="459" font-size="9" fill="#555">String</text>
+  <text x="305" y="459" text-anchor="end" font-size="9" fill="#718096">default: 'default'</text>
+
+  <rect x="60" y="464" width="260" height="18" fill="white"/>
+  <text x="72" y="477" font-size="9" fill="#333">completed_modules</text>
+  <text x="230" y="477" font-size="9" fill="#555">Array[String]</text>
+  <text x="305" y="477" text-anchor="end" font-size="9" fill="#718096">nullable</text>
+
+  <rect x="60" y="482" width="260" height="18" fill="#F7FAFC"/>
+  <text x="72" y="495" font-size="9" fill="#333">created_at</text>
+  <text x="230" y="495" font-size="9" fill="#555">DateTime</text>
+  <text x="305" y="495" text-anchor="end" font-size="9" fill="#718096">auto</text>
+
+  <rect x="60" y="500" width="260" height="18" fill="white"/>
+  <text x="72" y="513" font-size="9" fill="#333">updated_at</text>
+  <text x="230" y="513" font-size="9" fill="#555">DateTime</text>
+  <text x="305" y="513" text-anchor="end" font-size="9" fill="#718096">auto</text>
+  <!-- Border -->
+  <rect x="60" y="180" width="260" height="338" rx="4" fill="none" stroke="#1A3A5C" stroke-width="1.5"/>
+
+  <!-- ==================== TABLE: personal_access_tokens ==================== -->
+  <rect x="60" y="570" width="260" height="30" rx="4 4 0 0" fill="#1A3A5C" filter="url(#shadow)"/>
+  <text x="190" y="590" text-anchor="middle" font-size="13" font-weight="bold" fill="white">personal_access_tokens</text>
+  <rect x="60" y="600" width="260" height="20" fill="#2C5282"/>
+  <text x="72" y="614" font-size="9" font-weight="bold" fill="#BEE3F8">Column</text>
+  <text x="230" y="614" font-size="9" font-weight="bold" fill="#BEE3F8">Type</text>
+  <text x="305" y="614" text-anchor="end" font-size="9" font-weight="bold" fill="#BEE3F8">Constraint</text>
+
+  <rect x="60" y="620" width="260" height="18" fill="#1A3A5C"/>
+  <text x="72" y="633" font-size="9" fill="#FFD700" font-weight="bold">PK  _id</text>
+  <text x="230" y="633" font-size="9" fill="#E2E8F0">ObjectId</text>
+  <text x="305" y="633" text-anchor="end" font-size="9" fill="#90CDF4">NOT NULL</text>
+
+  <rect x="60" y="638" width="260" height="18" fill="#EBF4FF"/>
+  <text x="72" y="651" font-size="9" fill="#2B6CB0" font-weight="bold">FK  tokenable_id</text>
+  <text x="230" y="651" font-size="9" fill="#555">String (ref users)</text>
+  <text x="305" y="651" text-anchor="end" font-size="9" fill="#718096">INDEX</text>
+
+  <rect x="60" y="656" width="260" height="18" fill="white"/>
+  <text x="72" y="669" font-size="9" fill="#333">tokenable_type</text>
+  <text x="230" y="669" font-size="9" fill="#555">String</text>
+  <text x="305" y="669" text-anchor="end" font-size="9" fill="#718096">NOT NULL</text>
+
+  <rect x="60" y="674" width="260" height="18" fill="#F7FAFC"/>
+  <text x="72" y="687" font-size="9" fill="#333">name</text>
+  <text x="230" y="687" font-size="9" fill="#555">String</text>
+  <text x="305" y="687" text-anchor="end" font-size="9" fill="#718096">NOT NULL</text>
+
+  <rect x="60" y="692" width="260" height="18" fill="white"/>
+  <text x="72" y="705" font-size="9" fill="#333">token</text>
+  <text x="230" y="705" font-size="9" fill="#555">String(64)</text>
+  <text x="305" y="705" text-anchor="end" font-size="9" fill="#718096">UNIQUE</text>
+
+  <rect x="60" y="710" width="260" height="18" fill="#F7FAFC"/>
+  <text x="72" y="723" font-size="9" fill="#333">abilities</text>
+  <text x="230" y="723" font-size="9" fill="#555">JSON</text>
+  <text x="305" y="723" text-anchor="end" font-size="9" fill="#718096">nullable</text>
+
+  <rect x="60" y="728" width="260" height="18" fill="white"/>
+  <text x="72" y="741" font-size="9" fill="#333">last_used_at</text>
+  <text x="230" y="741" font-size="9" fill="#555">DateTime</text>
+  <text x="305" y="741" text-anchor="end" font-size="9" fill="#718096">nullable</text>
+
+  <rect x="60" y="746" width="260" height="18" fill="#F7FAFC"/>
+  <text x="72" y="759" font-size="9" fill="#333">expires_at</text>
+  <text x="230" y="759" font-size="9" fill="#555">DateTime</text>
+  <text x="305" y="759" text-anchor="end" font-size="9" fill="#718096">INDEX</text>
+
+  <rect x="60" y="764" width="260" height="18" fill="white"/>
+  <text x="72" y="777" font-size="9" fill="#333">created_at / updated_at</text>
+  <text x="230" y="777" font-size="9" fill="#555">DateTime</text>
+  <text x="305" y="777" text-anchor="end" font-size="9" fill="#718096">auto</text>
+  <rect x="60" y="570" width="260" height="228" rx="4" fill="none" stroke="#1A3A5C" stroke-width="1.5"/>
+
+  <!-- ==================== TABLE: daily_checkins ==================== -->
+  <rect x="400" y="180" width="260" height="30" rx="4 4 0 0" fill="#276749" filter="url(#shadow)"/>
+  <text x="530" y="200" text-anchor="middle" font-size="13" font-weight="bold" fill="white">daily_checkins</text>
+  <text x="650" y="200" text-anchor="end" font-size="9" fill="#9AE6B4">«document»</text>
+  <rect x="400" y="210" width="260" height="20" fill="#2F855A"/>
+  <text x="412" y="224" font-size="9" font-weight="bold" fill="#C6F6D5">Column</text>
+  <text x="565" y="224" font-size="9" font-weight="bold" fill="#C6F6D5">Type</text>
+  <text x="652" y="224" text-anchor="end" font-size="9" font-weight="bold" fill="#C6F6D5">Constraint</text>
+
+  <rect x="400" y="230" width="260" height="18" fill="#276749"/>
+  <text x="412" y="243" font-size="9" fill="#FFD700" font-weight="bold">PK  _id</text>
+  <text x="565" y="243" font-size="9" fill="#E2E8F0">ObjectId</text>
+  <text x="652" y="243" text-anchor="end" font-size="9" fill="#9AE6B4">NOT NULL</text>
+
+  <rect x="400" y="248" width="260" height="18" fill="#EBF4FF"/>
+  <text x="412" y="261" font-size="9" fill="#2B6CB0" font-weight="bold">FK  user_id</text>
+  <text x="565" y="261" font-size="9" fill="#555">String (ref users)</text>
+  <text x="652" y="261" text-anchor="end" font-size="9" fill="#718096">INDEX</text>
+
+  <rect x="400" y="266" width="260" height="18" fill="white"/>
+  <text x="412" y="279" font-size="9" fill="#333">nim</text>
+  <text x="565" y="279" font-size="9" fill="#555">String</text>
+  <text x="652" y="279" text-anchor="end" font-size="9" fill="#718096">INDEX</text>
+
+  <rect x="400" y="284" width="260" height="18" fill="#F7FAFC"/>
+  <text x="412" y="297" font-size="9" fill="#333">username</text>
+  <text x="565" y="297" font-size="9" fill="#555">String</text>
+  <text x="652" y="297" text-anchor="end" font-size="9" fill="#718096">-</text>
+
+  <rect x="400" y="302" width="260" height="18" fill="white"/>
+  <text x="412" y="315" font-size="9" fill="#333">mood_id</text>
+  <text x="565" y="315" font-size="9" fill="#555">Integer (emosi_kode)</text>
+  <text x="652" y="315" text-anchor="end" font-size="9" fill="#718096">1–10</text>
+
+  <rect x="400" y="320" width="260" height="18" fill="#F7FAFC"/>
+  <text x="412" y="333" font-size="9" fill="#333">mood_label</text>
+  <text x="565" y="333" font-size="9" fill="#555">String</text>
+  <text x="652" y="333" text-anchor="end" font-size="9" fill="#718096">NOT NULL</text>
+
+  <rect x="400" y="338" width="260" height="18" fill="white"/>
+  <text x="412" y="351" font-size="9" fill="#333">feeling_id</text>
+  <text x="565" y="351" font-size="9" fill="#555">Integer</text>
+  <text x="652" y="351" text-anchor="end" font-size="9" fill="#718096">1–28</text>
+
+  <rect x="400" y="356" width="260" height="18" fill="#F7FAFC"/>
+  <text x="412" y="369" font-size="9" fill="#333">perasaan</text>
+  <text x="565" y="369" font-size="9" fill="#555">String</text>
+  <text x="652" y="369" text-anchor="end" font-size="9" fill="#718096">nullable</text>
+
+  <rect x="400" y="374" width="260" height="18" fill="white"/>
+  <text x="412" y="387" font-size="9" fill="#333">recorded_at</text>
+  <text x="565" y="387" font-size="9" fill="#555">DateTime</text>
+  <text x="652" y="387" text-anchor="end" font-size="9" fill="#718096">NOT NULL</text>
+
+  <rect x="400" y="392" width="260" height="18" fill="#F7FAFC"/>
+  <text x="412" y="405" font-size="9" fill="#333">created_at / updated_at</text>
+  <text x="565" y="405" font-size="9" fill="#555">DateTime</text>
+  <text x="652" y="405" text-anchor="end" font-size="9" fill="#718096">auto</text>
+  <rect x="400" y="180" width="260" height="234" rx="4" fill="none" stroke="#276749" stroke-width="1.5"/>
+
+  <!-- ==================== TABLE: journal_texts (Story) ==================== -->
+  <rect x="400" y="470" width="260" height="30" rx="4 4 0 0" fill="#744210" filter="url(#shadow)"/>
+  <text x="530" y="490" text-anchor="middle" font-size="13" font-weight="bold" fill="white">journal_texts</text>
+  <text x="650" y="490" text-anchor="end" font-size="9" fill="#FBBF24">«document»</text>
+  <rect x="400" y="500" width="260" height="20" fill="#92400E"/>
+  <text x="412" y="514" font-size="9" font-weight="bold" fill="#FEF3C7">Column</text>
+  <text x="565" y="514" font-size="9" font-weight="bold" fill="#FEF3C7">Type</text>
+  <text x="652" y="514" text-anchor="end" font-size="9" font-weight="bold" fill="#FEF3C7">Constraint</text>
+
+  <rect x="400" y="520" width="260" height="18" fill="#744210"/>
+  <text x="412" y="533" font-size="9" fill="#FFD700" font-weight="bold">PK  _id</text>
+  <text x="565" y="533" font-size="9" fill="#E2E8F0">ObjectId</text>
+  <text x="652" y="533" text-anchor="end" font-size="9" fill="#FCD34D">NOT NULL</text>
+
+  <rect x="400" y="538" width="260" height="18" fill="#EBF4FF"/>
+  <text x="412" y="551" font-size="9" fill="#2B6CB0" font-weight="bold">FK  user_id</text>
+  <text x="565" y="551" font-size="9" fill="#555">String (ref users)</text>
+  <text x="652" y="551" text-anchor="end" font-size="9" fill="#718096">INDEX</text>
+
+  <rect x="400" y="556" width="260" height="18" fill="white"/>
+  <text x="412" y="569" font-size="9" fill="#333">nim</text>
+  <text x="565" y="569" font-size="9" fill="#555">String</text>
+  <text x="652" y="569" text-anchor="end" font-size="9" fill="#718096">INDEX</text>
+
+  <rect x="400" y="574" width="260" height="18" fill="#F7FAFC"/>
+  <text x="412" y="587" font-size="9" fill="#333">username</text>
+  <text x="565" y="587" font-size="9" fill="#555">String</text>
+  <text x="652" y="587" text-anchor="end" font-size="9" fill="#718096">-</text>
+
+  <rect x="400" y="592" width="260" height="18" fill="white"/>
+  <text x="412" y="605" font-size="9" fill="#333">description</text>
+  <text x="565" y="605" font-size="9" fill="#555">Text (encrypted)</text>
+  <text x="652" y="605" text-anchor="end" font-size="9" fill="#718096">NOT NULL</text>
+
+  <rect x="400" y="610" width="260" height="18" fill="#F7FAFC"/>
+  <text x="412" y="623" font-size="9" fill="#333">content</text>
+  <text x="565" y="623" font-size="9" fill="#555">Text</text>
+  <text x="652" y="623" text-anchor="end" font-size="9" fill="#718096">nullable</text>
+
+  <rect x="400" y="628" width="260" height="18" fill="white"/>
+  <text x="412" y="641" font-size="9" fill="#333">ai_level</text>
+  <text x="565" y="641" font-size="9" fill="#555">Integer</text>
+  <text x="652" y="641" text-anchor="end" font-size="9" fill="#718096">0–3</text>
+
+  <rect x="400" y="646" width="260" height="18" fill="#F7FAFC"/>
+  <text x="412" y="659" font-size="9" fill="#333">ai_label</text>
+  <text x="565" y="659" font-size="9" fill="#555">String</text>
+  <text x="652" y="659" text-anchor="end" font-size="9" fill="#718096">nullable</text>
+
+  <rect x="400" y="664" width="260" height="18" fill="white"/>
+  <text x="412" y="677" font-size="9" fill="#333">ai_confidence</text>
+  <text x="565" y="677" font-size="9" fill="#555">Float</text>
+  <text x="652" y="677" text-anchor="end" font-size="9" fill="#718096">nullable</text>
+
+  <rect x="400" y="682" width="260" height="18" fill="#F7FAFC"/>
+  <text x="412" y="695" font-size="9" fill="#333">ai_red_flag</text>
+  <text x="565" y="695" font-size="9" fill="#555">Boolean</text>
+  <text x="652" y="695" text-anchor="end" font-size="9" fill="#718096">nullable</text>
+
+  <rect x="400" y="700" width="260" height="18" fill="white"/>
+  <text x="412" y="713" font-size="9" fill="#333">created_at / updated_at</text>
+  <text x="565" y="713" font-size="9" fill="#555">DateTime</text>
+  <text x="652" y="713" text-anchor="end" font-size="9" fill="#718096">auto</text>
+  <rect x="400" y="470" width="260" height="248" rx="4" fill="none" stroke="#744210" stroke-width="1.5"/>
+
+  <!-- ==================== TABLE: mood_categories ==================== -->
+  <rect x="750" y="180" width="260" height="30" rx="4 4 0 0" fill="#553C9A" filter="url(#shadow)"/>
+  <text x="880" y="200" text-anchor="middle" font-size="13" font-weight="bold" fill="white">mood_categories</text>
+  <text x="1000" y="200" text-anchor="end" font-size="9" fill="#D6BCFA">«document»</text>
+  <rect x="750" y="210" width="260" height="20" fill="#6B46C1"/>
+  <text x="762" y="224" font-size="9" font-weight="bold" fill="#E9D8FD">Column</text>
+  <text x="920" y="224" font-size="9" font-weight="bold" fill="#E9D8FD">Type</text>
+  <text x="1002" y="224" text-anchor="end" font-size="9" font-weight="bold" fill="#E9D8FD">Constraint</text>
+
+  <rect x="750" y="230" width="260" height="18" fill="#553C9A"/>
+  <text x="762" y="243" font-size="9" fill="#FFD700" font-weight="bold">PK  _id</text>
+  <text x="920" y="243" font-size="9" fill="#E2E8F0">ObjectId</text>
+  <text x="1002" y="243" text-anchor="end" font-size="9" fill="#D6BCFA">NOT NULL</text>
+
+  <rect x="750" y="248" width="260" height="18" fill="white"/>
+  <text x="762" y="261" font-size="9" fill="#333">name</text>
+  <text x="920" y="261" font-size="9" fill="#555">String</text>
+  <text x="1002" y="261" text-anchor="end" font-size="9" fill="#718096">UNIQUE</text>
+
+  <rect x="750" y="266" width="260" height="18" fill="#F7FAFC"/>
+  <text x="762" y="279" font-size="9" fill="#333">label</text>
+  <text x="920" y="279" font-size="9" fill="#555">String</text>
+  <text x="1002" y="279" text-anchor="end" font-size="9" fill="#718096">NOT NULL</text>
+
+  <rect x="750" y="284" width="260" height="18" fill="white"/>
+  <text x="762" y="297" font-size="9" fill="#333">description</text>
+  <text x="920" y="297" font-size="9" fill="#555">Text</text>
+  <text x="1002" y="297" text-anchor="end" font-size="9" fill="#718096">nullable</text>
+
+  <rect x="750" y="302" width="260" height="18" fill="#F7FAFC"/>
+  <text x="762" y="315" font-size="9" fill="#333">icon_name</text>
+  <text x="920" y="315" font-size="9" fill="#555">String</text>
+  <text x="1002" y="315" text-anchor="end" font-size="9" fill="#718096">nullable</text>
+
+  <rect x="750" y="320" width="260" height="18" fill="white"/>
+  <text x="762" y="333" font-size="9" fill="#333">gradient_start</text>
+  <text x="920" y="333" font-size="9" fill="#555">String (hex)</text>
+  <text x="1002" y="333" text-anchor="end" font-size="9" fill="#718096">nullable</text>
+
+  <rect x="750" y="338" width="260" height="18" fill="#F7FAFC"/>
+  <text x="762" y="351" font-size="9" fill="#333">gradient_end</text>
+  <text x="920" y="351" font-size="9" fill="#555">String (hex)</text>
+  <text x="1002" y="351" text-anchor="end" font-size="9" fill="#718096">nullable</text>
+
+  <rect x="750" y="356" width="260" height="18" fill="white"/>
+  <text x="762" y="369" font-size="9" fill="#333">text_color</text>
+  <text x="920" y="369" font-size="9" fill="#555">String (hex)</text>
+  <text x="1002" y="369" text-anchor="end" font-size="9" fill="#718096">nullable</text>
+
+  <rect x="750" y="374" width="260" height="18" fill="#F7FAFC"/>
+  <text x="762" y="387" font-size="9" fill="#333">created_at / updated_at</text>
+  <text x="920" y="387" font-size="9" fill="#555">DateTime</text>
+  <text x="1002" y="387" text-anchor="end" font-size="9" fill="#718096">auto</text>
+  <rect x="750" y="180" width="260" height="212" rx="4" fill="none" stroke="#553C9A" stroke-width="1.5"/>
+
+  <!-- ==================== TABLE: feeling_categories ==================== -->
+  <rect x="750" y="450" width="260" height="30" rx="4 4 0 0" fill="#702459" filter="url(#shadow)"/>
+  <text x="880" y="470" text-anchor="middle" font-size="13" font-weight="bold" fill="white">feeling_categories</text>
+  <text x="1000" y="470" text-anchor="end" font-size="9" fill="#FBB6CE">«document»</text>
+  <rect x="750" y="480" width="260" height="20" fill="#97266D"/>
+  <text x="762" y="494" font-size="9" font-weight="bold" fill="#FED7E2">Column</text>
+  <text x="920" y="494" font-size="9" font-weight="bold" fill="#FED7E2">Type</text>
+  <text x="1002" y="494" text-anchor="end" font-size="9" font-weight="bold" fill="#FED7E2">Constraint</text>
+
+  <rect x="750" y="500" width="260" height="18" fill="#702459"/>
+  <text x="762" y="513" font-size="9" fill="#FFD700" font-weight="bold">PK  _id</text>
+  <text x="920" y="513" font-size="9" fill="#E2E8F0">ObjectId</text>
+  <text x="1002" y="513" text-anchor="end" font-size="9" fill="#FBB6CE">NOT NULL</text>
+
+  <rect x="750" y="518" width="260" height="18" fill="white"/>
+  <text x="762" y="531" font-size="9" fill="#333">mood_name</text>
+  <text x="920" y="531" font-size="9" fill="#555">String (ref name)</text>
+  <text x="1002" y="531" text-anchor="end" font-size="9" fill="#718096">INDEX</text>
+
+  <rect x="750" y="536" width="260" height="18" fill="#F7FAFC"/>
+  <text x="762" y="549" font-size="9" fill="#333">name</text>
+  <text x="920" y="549" font-size="9" fill="#555">String</text>
+  <text x="1002" y="549" text-anchor="end" font-size="9" fill="#718096">NOT NULL</text>
+
+  <rect x="750" y="554" width="260" height="18" fill="white"/>
+  <text x="762" y="567" font-size="9" fill="#333">description</text>
+  <text x="920" y="567" font-size="9" fill="#555">Text</text>
+  <text x="1002" y="567" text-anchor="end" font-size="9" fill="#718096">nullable</text>
+
+  <rect x="750" y="572" width="260" height="18" fill="#F7FAFC"/>
+  <text x="762" y="585" font-size="9" fill="#333">created_at / updated_at</text>
+  <text x="920" y="585" font-size="9" fill="#555">DateTime</text>
+  <text x="1002" y="585" text-anchor="end" font-size="9" fill="#718096">auto</text>
+  <rect x="750" y="450" width="260" height="144" rx="4" fill="none" stroke="#702459" stroke-width="1.5"/>
+
+  <!-- ==================== TABLE: modules ==================== -->
+  <rect x="1100" y="180" width="270" height="30" rx="4 4 0 0" fill="#C05621" filter="url(#shadow)"/>
+  <text x="1235" y="200" text-anchor="middle" font-size="13" font-weight="bold" fill="white">modules</text>
+  <text x="1360" y="200" text-anchor="end" font-size="9" fill="#FBBF24">«document»</text>
+  <rect x="1100" y="210" width="270" height="20" fill="#DD6B20"/>
+  <text x="1112" y="224" font-size="9" font-weight="bold" fill="#FEEBCB">Column</text>
+  <text x="1270" y="224" font-size="9" font-weight="bold" fill="#FEEBCB">Type</text>
+  <text x="1362" y="224" text-anchor="end" font-size="9" font-weight="bold" fill="#FEEBCB">Constraint</text>
+
+  <rect x="1100" y="230" width="270" height="18" fill="#C05621"/>
+  <text x="1112" y="243" font-size="9" fill="#FFD700" font-weight="bold">PK  _id</text>
+  <text x="1270" y="243" font-size="9" fill="#E2E8F0">ObjectId</text>
+  <text x="1362" y="243" text-anchor="end" font-size="9" fill="#FBD38D">NOT NULL</text>
+
+  <rect x="1100" y="248" width="270" height="18" fill="white"/>
+  <text x="1112" y="261" font-size="9" fill="#333">title</text>
+  <text x="1270" y="261" font-size="9" fill="#555">String</text>
+  <text x="1362" y="261" text-anchor="end" font-size="9" fill="#718096">NOT NULL</text>
+
+  <rect x="1100" y="266" width="270" height="18" fill="#F7FAFC"/>
+  <text x="1112" y="279" font-size="9" fill="#333">subtitle</text>
+  <text x="1270" y="279" font-size="9" fill="#555">String</text>
+  <text x="1362" y="279" text-anchor="end" font-size="9" fill="#718096">nullable</text>
+
+  <rect x="1100" y="284" width="270" height="18" fill="white"/>
+  <text x="1112" y="297" font-size="9" fill="#333">description</text>
+  <text x="1270" y="297" font-size="9" fill="#555">Text</text>
+  <text x="1362" y="297" text-anchor="end" font-size="9" fill="#718096">nullable</text>
+
+  <rect x="1100" y="302" width="270" height="18" fill="#F7FAFC"/>
+  <text x="1112" y="315" font-size="9" fill="#333">content</text>
+  <text x="1270" y="315" font-size="9" fill="#555">Text</text>
+  <text x="1362" y="315" text-anchor="end" font-size="9" fill="#718096">nullable</text>
+
+  <rect x="1100" y="320" width="270" height="18" fill="white"/>
+  <text x="1112" y="333" font-size="9" fill="#333">icon</text>
+  <text x="1270" y="333" font-size="9" fill="#555">String (emoji)</text>
+  <text x="1362" y="333" text-anchor="end" font-size="9" fill="#718096">nullable</text>
+
+  <rect x="1100" y="338" width="270" height="18" fill="#F7FAFC"/>
+  <text x="1112" y="351" font-size="9" fill="#333">points / reward_point</text>
+  <text x="1270" y="351" font-size="9" fill="#555">Integer</text>
+  <text x="1362" y="351" text-anchor="end" font-size="9" fill="#718096">default: 0</text>
+
+  <rect x="1100" y="356" width="270" height="18" fill="white"/>
+  <text x="1112" y="369" font-size="9" fill="#333">category / kategori</text>
+  <text x="1270" y="369" font-size="9" fill="#555">String</text>
+  <text x="1362" y="369" text-anchor="end" font-size="9" fill="#718096">nullable</text>
+
+  <rect x="1100" y="374" width="270" height="18" fill="#F7FAFC"/>
+  <text x="1112" y="387" font-size="9" fill="#333">color</text>
+  <text x="1270" y="387" font-size="9" fill="#555">String (hex)</text>
+  <text x="1362" y="387" text-anchor="end" font-size="9" fill="#718096">nullable</text>
+
+  <rect x="1100" y="392" width="270" height="18" fill="white"/>
+  <text x="1112" y="405" font-size="9" fill="#333">status</text>
+  <text x="1270" y="405" font-size="9" fill="#555">Boolean</text>
+  <text x="1362" y="405" text-anchor="end" font-size="9" fill="#718096">default: false</text>
+
+  <rect x="1100" y="410" width="270" height="18" fill="#F7FAFC"/>
+  <text x="1112" y="423" font-size="9" fill="#333">content_url</text>
+  <text x="1270" y="423" font-size="9" fill="#555">String (URL/path)</text>
+  <text x="1362" y="423" text-anchor="end" font-size="9" fill="#718096">nullable</text>
+
+  <rect x="1100" y="428" width="270" height="18" fill="white"/>
+  <text x="1112" y="441" font-size="9" fill="#333">thumbnail / thumbnail_url</text>
+  <text x="1270" y="441" font-size="9" fill="#555">String (URL/path)</text>
+  <text x="1362" y="441" text-anchor="end" font-size="9" fill="#718096">nullable</text>
+
+  <rect x="1100" y="446" width="270" height="18" fill="#F7FAFC"/>
+  <text x="1112" y="459" font-size="9" fill="#333">created_at / updated_at</text>
+  <text x="1270" y="459" font-size="9" fill="#555">DateTime</text>
+  <text x="1362" y="459" text-anchor="end" font-size="9" fill="#718096">auto</text>
+  <rect x="1100" y="180" width="270" height="284" rx="4" fill="none" stroke="#C05621" stroke-width="1.5"/>
+
+  <!-- ==================== TABLE: notifications ==================== -->
+  <rect x="1100" y="520" width="270" height="30" rx="4 4 0 0" fill="#1A535C" filter="url(#shadow)"/>
+  <text x="1235" y="540" text-anchor="middle" font-size="13" font-weight="bold" fill="white">notifications</text>
+  <text x="1360" y="540" text-anchor="end" font-size="9" fill="#81E6D9">«document»</text>
+  <rect x="1100" y="550" width="270" height="20" fill="#234E52"/>
+  <text x="1112" y="564" font-size="9" font-weight="bold" fill="#B2F5EA">Column</text>
+  <text x="1270" y="564" font-size="9" font-weight="bold" fill="#B2F5EA">Type</text>
+  <text x="1362" y="564" text-anchor="end" font-size="9" font-weight="bold" fill="#B2F5EA">Constraint</text>
+
+  <rect x="1100" y="570" width="270" height="18" fill="#1A535C"/>
+  <text x="1112" y="583" font-size="9" fill="#FFD700" font-weight="bold">PK  _id</text>
+  <text x="1270" y="583" font-size="9" fill="#E2E8F0">ObjectId</text>
+  <text x="1362" y="583" text-anchor="end" font-size="9" fill="#81E6D9">NOT NULL</text>
+
+  <rect x="1100" y="588" width="270" height="18" fill="white"/>
+  <text x="1112" y="601" font-size="9" fill="#333">nim</text>
+  <text x="1270" y="601" font-size="9" fill="#555">String (ref users.nim)</text>
+  <text x="1362" y="601" text-anchor="end" font-size="9" fill="#718096">INDEX</text>
+
+  <rect x="1100" y="606" width="270" height="18" fill="#F7FAFC"/>
+  <text x="1112" y="619" font-size="9" fill="#333">pesan</text>
+  <text x="1270" y="619" font-size="9" fill="#555">String</text>
+  <text x="1362" y="619" text-anchor="end" font-size="9" fill="#718096">NOT NULL</text>
+
+  <rect x="1100" y="624" width="270" height="18" fill="white"/>
+  <text x="1112" y="637" font-size="9" fill="#333">status</text>
+  <text x="1270" y="637" font-size="9" fill="#555">String (enum)</text>
+  <text x="1362" y="637" text-anchor="end" font-size="9" fill="#718096">'belum'|'sudah'</text>
+
+  <rect x="1100" y="642" width="270" height="18" fill="#F7FAFC"/>
+  <text x="1112" y="655" font-size="9" fill="#333">created_at / updated_at</text>
+  <text x="1270" y="655" font-size="9" fill="#555">DateTime</text>
+  <text x="1362" y="655" text-anchor="end" font-size="9" fill="#718096">auto</text>
+  <rect x="1100" y="520" width="270" height="142" rx="4" fill="none" stroke="#1A535C" stroke-width="1.5"/>
+
+  <!-- ==================== TABLE: moods ==================== -->
+  <rect x="750" y="660" width="260" height="30" rx="4 4 0 0" fill="#2D3748" filter="url(#shadow)"/>
+  <text x="880" y="680" text-anchor="middle" font-size="13" font-weight="bold" fill="white">moods</text>
+  <text x="1000" y="680" text-anchor="end" font-size="9" fill="#A0AEC0">«document»</text>
+  <rect x="750" y="690" width="260" height="20" fill="#4A5568"/>
+  <text x="762" y="704" font-size="9" font-weight="bold" fill="#EDF2F7">Column</text>
+  <text x="920" y="704" font-size="9" font-weight="bold" fill="#EDF2F7">Type</text>
+  <text x="1002" y="704" text-anchor="end" font-size="9" font-weight="bold" fill="#EDF2F7">Constraint</text>
+
+  <rect x="750" y="710" width="260" height="18" fill="#2D3748"/>
+  <text x="762" y="723" font-size="9" fill="#FFD700" font-weight="bold">PK  _id</text>
+  <text x="920" y="723" font-size="9" fill="#E2E8F0">ObjectId</text>
+  <text x="1002" y="723" text-anchor="end" font-size="9" fill="#A0AEC0">NOT NULL</text>
+
+  <rect x="750" y="728" width="260" height="18" fill="#EBF4FF"/>
+  <text x="762" y="741" font-size="9" fill="#2B6CB0" font-weight="bold">FK  user_id</text>
+  <text x="920" y="741" font-size="9" fill="#555">String (ref users)</text>
+  <text x="1002" y="741" text-anchor="end" font-size="9" fill="#718096">INDEX</text>
+
+  <rect x="750" y="746" width="260" height="18" fill="white"/>
+  <text x="762" y="759" font-size="9" fill="#333">nim</text>
+  <text x="920" y="759" font-size="9" fill="#555">String</text>
+  <text x="1002" y="759" text-anchor="end" font-size="9" fill="#718096">INDEX</text>
+
+  <rect x="750" y="764" width="260" height="18" fill="#F7FAFC"/>
+  <text x="762" y="777" font-size="9" fill="#333">username</text>
+  <text x="920" y="777" font-size="9" fill="#555">String</text>
+  <text x="1002" y="777" text-anchor="end" font-size="9" fill="#718096">-</text>
+
+  <rect x="750" y="782" width="260" height="18" fill="white"/>
+  <text x="762" y="795" font-size="9" fill="#333">mood_id</text>
+  <text x="920" y="795" font-size="9" fill="#555">Integer</text>
+  <text x="1002" y="795" text-anchor="end" font-size="9" fill="#718096">NOT NULL</text>
+
+  <rect x="750" y="800" width="260" height="18" fill="#F7FAFC"/>
+  <text x="762" y="813" font-size="9" fill="#333">mood_name</text>
+  <text x="920" y="813" font-size="9" fill="#555">String</text>
+  <text x="1002" y="813" text-anchor="end" font-size="9" fill="#718096">NOT NULL</text>
+
+  <rect x="750" y="818" width="260" height="18" fill="white"/>
+  <text x="762" y="831" font-size="9" fill="#333">mood_code</text>
+  <text x="920" y="831" font-size="9" fill="#555">String</text>
+  <text x="1002" y="831" text-anchor="end" font-size="9" fill="#718096">nullable</text>
+
+  <rect x="750" y="836" width="260" height="18" fill="#F7FAFC"/>
+  <text x="762" y="849" font-size="9" fill="#333">recorded_at</text>
+  <text x="920" y="849" font-size="9" fill="#555">DateTime</text>
+  <text x="1002" y="849" text-anchor="end" font-size="9" fill="#718096">NOT NULL</text>
+
+  <rect x="750" y="854" width="260" height="18" fill="white"/>
+  <text x="762" y="867" font-size="9" fill="#333">created_at / updated_at</text>
+  <text x="920" y="867" font-size="9" fill="#555">DateTime</text>
+  <text x="1002" y="867" text-anchor="end" font-size="9" fill="#718096">auto</text>
+  <rect x="750" y="660" width="260" height="212" rx="4" fill="none" stroke="#2D3748" stroke-width="1.5"/>
+
+  <!-- ==================== TABLE: feelings ==================== -->
+  <rect x="400" y="780" width="260" height="30" rx="4 4 0 0" fill="#44337A" filter="url(#shadow)"/>
+  <text x="530" y="800" text-anchor="middle" font-size="13" font-weight="bold" fill="white">feelings</text>
+  <text x="650" y="800" text-anchor="end" font-size="9" fill="#E9D8FD">«document»</text>
+  <rect x="400" y="810" width="260" height="20" fill="#553C9A"/>
+  <text x="412" y="824" font-size="9" font-weight="bold" fill="#E9D8FD">Column</text>
+  <text x="565" y="824" font-size="9" font-weight="bold" fill="#E9D8FD">Type</text>
+  <text x="652" y="824" text-anchor="end" font-size="9" font-weight="bold" fill="#E9D8FD">Constraint</text>
+
+  <rect x="400" y="830" width="260" height="18" fill="#44337A"/>
+  <text x="412" y="843" font-size="9" fill="#FFD700" font-weight="bold">PK  _id</text>
+  <text x="565" y="843" font-size="9" fill="#E2E8F0">ObjectId</text>
+  <text x="652" y="843" text-anchor="end" font-size="9" fill="#D6BCFA">NOT NULL</text>
+
+  <rect x="400" y="848" width="260" height="18" fill="#EBF4FF"/>
+  <text x="412" y="861" font-size="9" fill="#2B6CB0" font-weight="bold">FK  user_id</text>
+  <text x="565" y="861" font-size="9" fill="#555">String (ref users)</text>
+  <text x="652" y="861" text-anchor="end" font-size="9" fill="#718096">INDEX</text>
+
+  <rect x="400" y="866" width="260" height="18" fill="white"/>
+  <text x="412" y="879" font-size="9" fill="#333">nim</text>
+  <text x="565" y="879" font-size="9" fill="#555">String</text>
+  <text x="652" y="879" text-anchor="end" font-size="9" fill="#718096">INDEX</text>
+
+  <rect x="400" y="884" width="260" height="18" fill="#F7FAFC"/>
+  <text x="412" y="897" font-size="9" fill="#333">username</text>
+  <text x="565" y="897" font-size="9" fill="#555">String</text>
+  <text x="652" y="897" text-anchor="end" font-size="9" fill="#718096">-</text>
+
+  <rect x="400" y="902" width="260" height="18" fill="white"/>
+  <text x="412" y="915" font-size="9" fill="#333">mood_id</text>
+  <text x="565" y="915" font-size="9" fill="#555">Integer</text>
+  <text x="652" y="915" text-anchor="end" font-size="9" fill="#718096">NOT NULL</text>
+
+  <rect x="400" y="920" width="260" height="18" fill="#F7FAFC"/>
+  <text x="412" y="933" font-size="9" fill="#333">feeling_id</text>
+  <text x="565" y="933" font-size="9" fill="#555">Integer</text>
+  <text x="652" y="933" text-anchor="end" font-size="9" fill="#718096">NOT NULL</text>
+
+  <rect x="400" y="938" width="260" height="18" fill="white"/>
+  <text x="412" y="951" font-size="9" fill="#333">feeling_name</text>
+  <text x="565" y="951" font-size="9" fill="#555">String</text>
+  <text x="652" y="951" text-anchor="end" font-size="9" fill="#718096">NOT NULL</text>
+
+  <rect x="400" y="956" width="260" height="18" fill="#F7FAFC"/>
+  <text x="412" y="969" font-size="9" fill="#333">feeling_code</text>
+  <text x="565" y="969" font-size="9" fill="#555">String</text>
+  <text x="652" y="969" text-anchor="end" font-size="9" fill="#718096">nullable</text>
+
+  <rect x="400" y="974" width="260" height="18" fill="white"/>
+  <text x="412" y="987" font-size="9" fill="#333">recorded_at</text>
+  <text x="565" y="987" font-size="9" fill="#555">DateTime</text>
+  <text x="652" y="987" text-anchor="end" font-size="9" fill="#718096">NOT NULL</text>
+
+  <rect x="400" y="992" width="260" height="18" fill="#F7FAFC"/>
+  <text x="412" y="1005" font-size="9" fill="#333">created_at / updated_at</text>
+  <text x="565" y="1005" font-size="9" fill="#555">DateTime</text>
+  <text x="652" y="1005" text-anchor="end" font-size="9" fill="#718096">auto</text>
+  <rect x="400" y="780" width="260" height="230" rx="4" fill="none" stroke="#44337A" stroke-width="1.5"/>
+
+  <!-- ==================== RELATIONSHIPS (Lines) ==================== -->
+  <!-- users (1) → daily_checkins (N): user_id -->
+  <line x1="320" y1="310" x2="400" y2="295" stroke="#4A6FA5" stroke-width="1.5" marker-end="url(#arrow-end)"/>
+  <text x="330" y="307" font-size="9" fill="#4A6FA5" font-style="italic">1</text>
+  <text x="388" y="292" font-size="9" fill="#4A6FA5" font-style="italic">N</text>
+
+  <!-- users (1) → journal_texts (N): user_id / nim -->
+  <line x1="320" y1="370" x2="400" y2="550" stroke="#4A6FA5" stroke-width="1.5" marker-end="url(#arrow-end)"/>
+  <text x="322" y="367" font-size="9" fill="#4A6FA5" font-style="italic">1</text>
+  <text x="388" y="548" font-size="9" fill="#4A6FA5" font-style="italic">N</text>
+
+  <!-- users (1) → personal_access_tokens (N): tokenable_id -->
+  <line x1="190" y1="518" x2="190" y2="570" stroke="#4A6FA5" stroke-width="1.5" marker-end="url(#arrow-end)"/>
+  <text x="196" y="538" font-size="9" fill="#4A6FA5" font-style="italic">1</text>
+  <text x="196" y="566" font-size="9" fill="#4A6FA5" font-style="italic">N</text>
+
+  <!-- users (1) → moods (N): user_id -->
+  <line x1="200" y1="518" x2="760" y2="740" stroke="#4A6FA5" stroke-width="1.5" marker-end="url(#arrow-end)" stroke-dasharray="6,3"/>
+  <text x="488" y="625" font-size="9" fill="#4A6FA5" font-style="italic">1 : N  (user_id)</text>
+
+  <!-- users (1) → feelings (N): user_id -->
+  <line x1="190" y1="518" x2="450" y2="780" stroke="#4A6FA5" stroke-width="1.5" marker-end="url(#arrow-end)" stroke-dasharray="6,3"/>
+  <text x="280" y="700" font-size="9" fill="#4A6FA5" font-style="italic">1 : N  (user_id)</text>
+
+  <!-- users (1) → notifications (N): nim -->
+  <line x1="320" y1="340" x2="1100" y2="590" stroke="#4A6FA5" stroke-width="1.5" marker-end="url(#arrow-end)" stroke-dasharray="6,3"/>
+  <text x="680" y="385" font-size="9" fill="#4A6FA5" font-style="italic">1 : N  (nim)</text>
+
+  <!-- mood_categories (1) → feeling_categories (N): mood_name → name -->
+  <line x1="880" y1="392" x2="880" y2="450" stroke="#9B59B6" stroke-width="1.5" marker-end="url(#arrow-end)"/>
+  <text x="886" y="414" font-size="9" fill="#9B59B6" font-style="italic">1</text>
+  <text x="886" y="446" font-size="9" fill="#9B59B6" font-style="italic">N</text>
+
+  <!-- mood_categories (1) → moods (N): mood_id (logical ref) -->
+  <line x1="880" y1="392" x2="880" y2="660" stroke="#9B59B6" stroke-width="1.5" marker-end="url(#arrow-end)" stroke-dasharray="5,3"/>
+  <text x="888" y="535" font-size="9" fill="#9B59B6" font-style="italic">ref</text>
+
+  <!-- feeling_categories (1) → feelings (N): feeling_id (logical ref) -->
+  <line x1="810" y1="594" x2="620" y2="910" stroke="#9B59B6" stroke-width="1.5" marker-end="url(#arrow-end)" stroke-dasharray="5,3"/>
+  <text x="720" y="740" font-size="9" fill="#9B59B6" font-style="italic">ref</text>
+
+  <!-- daily_checkins → mood_categories (soft ref) -->
+  <line x1="660" y1="310" x2="750" y2="290" stroke="#805AD5" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="685" y="305" font-size="8" fill="#805AD5" font-style="italic">soft ref</text>
+
+  <!-- daily_checkins → feeling_categories (soft ref) -->
+  <line x1="660" y1="356" x2="750" y2="530" stroke="#805AD5" stroke-width="1" stroke-dasharray="4,3"/>
+
+  <!-- ==================== CARDINALITY LABELS ==================== -->
+  <!-- Label for users → daily_checkins -->
+  <rect x="340" y="250" width="52" height="14" rx="3" fill="#EBF4FF" stroke="#4A6FA5" stroke-width="0.5"/>
+  <text x="366" y="261" text-anchor="middle" font-size="8" fill="#2B6CB0">user_id FK</text>
+
+  <!-- Label for users → notifications -->
+  <rect x="640" y="370" width="40" height="14" rx="3" fill="#EBF4FF" stroke="#4A6FA5" stroke-width="0.5"/>
+  <text x="660" y="381" text-anchor="middle" font-size="8" fill="#2B6CB0">nim FK</text>
+
+  <!-- ==================== COLLECTION INFO BOXES ==================== -->
+  <!-- MongoDB note box -->
+  <rect x="1100" y="710" width="270" height="80" rx="6" fill="#FFFBEB" stroke="#F6AD55" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="1235" y="728" text-anchor="middle" font-size="11" font-weight="bold" fill="#744210">⚙ Database Notes</text>
+  <text x="1112" y="746" font-size="9" fill="#555">• Engine: MongoDB Atlas (NoSQL)</text>
+  <text x="1112" y="760" font-size="9" fill="#555">• Relationships via soft references (_id, nim)</text>
+  <text x="1112" y="774" font-size="9" fill="#555">• No enforced FK constraints (NoSQL)</text>
+  <text x="1112" y="788" font-size="9" fill="#555">• Journal content encrypted (Laravel Crypt)</text>
+
+  <!-- AI Integration note -->
+  <rect x="1100" y="810" width="270" height="68" rx="6" fill="#EBF8FF" stroke="#63B3ED" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="1235" y="828" text-anchor="middle" font-size="11" font-weight="bold" fill="#1A365D">🤖 AI Integration</text>
+  <text x="1112" y="846" font-size="9" fill="#555">• journal_texts.ai_level: 0–3 risk level</text>
+  <text x="1112" y="860" font-size="9" fill="#555">• journal_texts.ai_label: classification label</text>
+  <text x="1112" y="874" font-size="9" fill="#555">• AI results from external Python AI Service</text>
+
+  <!-- Auth note -->
+  <rect x="60" y="820" width="260" height="60" rx="6" fill="#F0FFF4" stroke="#68D391" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="190" y="838" text-anchor="middle" font-size="11" font-weight="bold" fill="#276749">🔐 Auth Flow</text>
+  <text x="72" y="856" font-size="9" fill="#555">• External CIS API authenticates user</text>
+  <text x="72" y="870" font-size="9" fill="#555">• Laravel Sanctum manages tokens</text>
+  <text x="72" y="884" font-size="9" fill="#555">• Tokens stored in personal_access_tokens</text>
+  <rect x="60" y="820" width="260" height="72" rx="6" fill="none" stroke="#68D391" stroke-width="1.5"/>
+
+  <!-- Feeling code map note -->
+  <rect x="60" y="910" width="320" height="68" rx="6" fill="#FFF5F5" stroke="#FC8181" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="220" y="928" text-anchor="middle" font-size="11" font-weight="bold" fill="#742A2A">📊 Feeling Code Map (1–28)</text>
+  <text x="72" y="946" font-size="9" fill="#555">Senang: 1–4  |  Antusias: 5–8  |  Netral: 9–12</text>
+  <text x="72" y="960" font-size="9" fill="#555">Terkejut: 13–16  |  Sedih: 17–20  |  Takut: 21–24</text>
+  <text x="72" y="974" font-size="9" fill="#555">Marah: 25–28  (defined in MoodController)</text>
+
+  <!-- Mood code map note -->
+  <rect x="400" y="1040" width="320" height="52" rx="6" fill="#FAF5FF" stroke="#B794F4" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="560" y="1058" text-anchor="middle" font-size="11" font-weight="bold" fill="#44337A">📊 Mood Code (emosi_kode: 1–10)</text>
+  <text x="412" y="1076" font-size="9" fill="#555">Mapped to 7 MoodCategories: Senang, Antusias, Netral,</text>
+  <text x="412" y="1090" font-size="9" fill="#555">Terkejut, Sedih, Takut, Marah</text>
+
+  <!-- Footer -->
+  <rect x="0" y="1160" width="1600" height="40" fill="#1A3A5C"/>
+  <text x="800" y="1183" text-anchor="middle" font-size="11" fill="#90A8C3">EMORA App — Emotional Monitoring and Reflective Activity  |  Physical Data Model  |  Backend: Laravel 11 + MongoDB Atlas  |  © 2026</text>
+
+</svg>

@@ -88,7 +88,7 @@ class AuthController extends Controller
                 $cisUser['prodi'] = $profile['prodi'] ?? $cisUser['prodi'] ?? null;
                 $cisUser['angkatan'] = $profile['tahun_masuk'] ?? $profile['angkatan'] ?? $cisUser['angkatan'] ?? null;
                 $cisUser['asrama'] = $profile['asrama'] ?? $cisUser['asrama'] ?? null;
-                $cisUser['jenis_kelamin'] = $profile['jenis_kelamin'] ?? null;
+                $cisUser['jenis_kelamin'] = $profile['jenis_kelamin'] ??  null;
             }
 
             $updateData = [

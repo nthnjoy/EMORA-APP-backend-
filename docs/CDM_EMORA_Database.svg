@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="1080" viewBox="0 0 1500 1080" font-family="Segoe UI, Arial, sans-serif">
+
+  <!-- ===== BACKGROUND & GRID ===== -->
+  <defs>
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#D8DEE8" stroke-width="0.5"/>
+    </pattern>
+    <filter id="shadow">
+      <feDropShadow dx="2" dy="3" stdDeviation="3" flood-color="#00000022"/>
+    </filter>
+
+    <!-- Crow's Foot: Many side (fork) -->
+    <marker id="cf-many" markerWidth="12" markerHeight="12" refX="11" refY="6" orient="auto">
+      <!-- fork lines -->
+      <line x1="11" y1="1" x2="1" y2="6" stroke="#34495E" stroke-width="1.5"/>
+      <line x1="11" y1="11" x2="1" y2="6" stroke="#34495E" stroke-width="1.5"/>
+      <line x1="11" y1="6" x2="1" y2="6" stroke="#34495E" stroke-width="1.5"/>
+    </marker>
+
+    <!-- One side (single bar) -->
+    <marker id="cf-one" markerWidth="8" markerHeight="12" refX="1" refY="6" orient="auto">
+      <line x1="1" y1="1" x2="1" y2="11" stroke="#34495E" stroke-width="2"/>
+    </marker>
+
+    <!-- Crow's Foot: Many side flipped (for right-to-left arrows) -->
+    <marker id="cf-many-rev" markerWidth="12" markerHeight="12" refX="1" refY="6" orient="auto">
+      <line x1="1" y1="1" x2="11" y2="6" stroke="#34495E" stroke-width="1.5"/>
+      <line x1="1" y1="11" x2="11" y2="6" stroke="#34495E" stroke-width="1.5"/>
+      <line x1="1" y1="6" x2="11" y2="6" stroke="#34495E" stroke-width="1.5"/>
+    </marker>
+
+    <!-- One side flipped -->
+    <marker id="cf-one-rev" markerWidth="8" markerHeight="12" refX="7" refY="6" orient="auto">
+      <line x1="7" y1="1" x2="7" y2="11" stroke="#34495E" stroke-width="2"/>
+    </marker>
+  </defs>
+
+  <rect width="1500" height="1080" fill="#EEF1F6"/>
+  <rect width="1500" height="1080" fill="url(#grid)"/>
+
+  <!-- ===== HEADER ===== -->
+  <rect x="0" y="0" width="1500" height="52" fill="#1A3A5C"/>
+  <text x="750" y="22" text-anchor="middle" font-size="11" fill="#90A8C3" letter-spacing="2">EMORA APP — EMOTIONAL MONITORING AND REFLECTIVE ACTIVITY</text>
+  <text x="750" y="42" text-anchor="middle" font-size="18" font-weight="bold" fill="white" letter-spacing="1">Conceptual Data Model (CDM)</text>
+  <text x="1490" y="22" text-anchor="end" font-size="10" fill="#7A8EA8">Diagram Type: CDM  |  Notation: PowerDesigner / Crow's Foot</text>
+  <text x="1490" y="38" text-anchor="end" font-size="10" fill="#7A8EA8">Database: MongoDB Atlas  |  Version: 1.0  |  © 2026</text>
+
+  <!-- ===== LEGEND ===== -->
+  <rect x="16" y="64" width="210" height="118" rx="6" fill="white" stroke="#C5D0DE" stroke-width="1" filter="url(#shadow)"/>
+  <text x="121" y="82" text-anchor="middle" font-size="11" font-weight="bold" fill="#1A3A5C">LEGEND</text>
+  <line x1="26" y1="86" x2="216" y2="86" stroke="#E2E8F0" stroke-width="1"/>
+  <!-- Entity box sample -->
+  <rect x="26" y="92" width="60" height="18" fill="#1A3A5C" rx="2"/>
+  <text x="56" y="105" text-anchor="middle" font-size="9" fill="white">ENTITY</text>
+  <text x="100" y="105" font-size="9" fill="#555">Entity Name</text>
+  <!-- PK row sample -->
+  <rect x="26" y="110" width="60" height="14" fill="#2C5282" rx="0"/>
+  <text x="56" y="121" text-anchor="middle" font-size="8" fill="#FFD700">PK  identifier</text>
+  <text x="100" y="121" font-size="9" fill="#555">Primary Key</text>
+  <!-- Attribute row sample -->
+  <rect x="26" y="124" width="60" height="14" fill="white" rx="0" stroke="#C5D0DE" stroke-width="0.5"/>
+  <text x="56" y="135" text-anchor="middle" font-size="8" fill="#333">attribute</text>
+  <text x="100" y="135" font-size="9" fill="#555">Attribute</text>
+  <!-- Crow foot legend -->
+  <line x1="26" y1="150" x2="60" y2="150" stroke="#34495E" stroke-width="1.5" marker-start="url(#cf-one-rev)" marker-end="url(#cf-many)"/>
+  <text x="72" y="154" font-size="9" fill="#555">One-to-Many</text>
+
+  <!-- ===== ENTITY: USER ===== -->
+  <!-- Header -->
+  <rect x="90" y="180" width="220" height="28" rx="3 3 0 0" fill="#1A3A5C" filter="url(#shadow)"/>
+  <text x="200" y="199" text-anchor="middle" font-size="13" font-weight="bold" fill="white" letter-spacing="0.5">USER</text>
+  <!-- PK row -->
+  <rect x="90" y="208" width="220" height="20" fill="#2C5282"/>
+  <text x="102" y="222" font-size="9" fill="#FFD700" font-weight="bold">PK  id_user</text>
+  <!-- Attributes -->
+  <rect x="90" y="228" width="220" height="18" fill="white"/>
+  <text x="102" y="240" font-size="9" fill="#333">name</text>
+  <rect x="90" y="246" width="220" height="18" fill="#F7FAFC"/>
+  <text x="102" y="258" font-size="9" fill="#333">username</text>
+  <rect x="90" y="264" width="220" height="18" fill="white"/>
+  <text x="102" y="276" font-size="9" fill="#333">email</text>
+  <rect x="90" y="282" width="220" height="18" fill="#F7FAFC"/>
+  <text x="102" y="294" font-size="9" fill="#333">password</text>
+  <rect x="90" y="300" width="220" height="18" fill="white"/>
+  <text x="102" y="312" font-size="9" fill="#333">nim</text>
+  <rect x="90" y="318" width="220" height="18" fill="#F7FAFC"/>
+  <text x="102" y="330" font-size="9" fill="#333">prodi</text>
+  <rect x="90" y="336" width="220" height="18" fill="white"/>
+  <text x="102" y="348" font-size="9" fill="#333">angkatan</text>
+  <rect x="90" y="354" width="220" height="18" fill="#F7FAFC"/>
+  <text x="102" y="366" font-size="9" fill="#333">asrama</text>
+  <rect x="90" y="372" width="220" height="18" fill="white"/>
+  <text x="102" y="384" font-size="9" fill="#333">jenis_kelamin</text>
+  <rect x="90" y="390" width="220" height="18" fill="#F7FAFC"/>
+  <text x="102" y="402" font-size="9" fill="#333">point</text>
+  <rect x="90" y="408" width="220" height="18" fill="white"/>
+  <text x="102" y="420" font-size="9" fill="#333">purchased_themes</text>
+  <rect x="90" y="426" width="220" height="18" fill="#F7FAFC"/>
+  <text x="102" y="438" font-size="9" fill="#333">active_theme</text>
+  <rect x="90" y="444" width="220" height="18" fill="white"/>
+  <text x="102" y="456" font-size="9" fill="#333">completed_modules</text>
+  <!-- Border -->
+  <rect x="90" y="180" width="220" height="282" rx="3" fill="none" stroke="#1A3A5C" stroke-width="2"/>
+
+  <!-- ===== ENTITY: ACCESS_TOKEN ===== -->
+  <rect x="90" y="530" width="220" height="28" rx="3 3 0 0" fill="#2C5282" filter="url(#shadow)"/>
+  <text x="200" y="549" text-anchor="middle" font-size="13" font-weight="bold" fill="white">ACCESS_TOKEN</text>
+  <rect x="90" y="558" width="220" height="20" fill="#2B4C8C"/>
+  <text x="102" y="572" font-size="9" fill="#FFD700" font-weight="bold">PK  id_token</text>
+  <rect x="90" y="578" width="220" height="18" fill="white"/>
+  <text x="102" y="590" font-size="9" fill="#333">name</text>
+  <rect x="90" y="596" width="220" height="18" fill="#F7FAFC"/>
+  <text x="102" y="608" font-size="9" fill="#333">token</text>
+  <rect x="90" y="614" width="220" height="18" fill="white"/>
+  <text x="102" y="626" font-size="9" fill="#333">abilities</text>
+  <rect x="90" y="632" width="220" height="18" fill="#F7FAFC"/>
+  <text x="102" y="644" font-size="9" fill="#333">last_used_at</text>
+  <rect x="90" y="650" width="220" height="18" fill="white"/>
+  <text x="102" y="662" font-size="9" fill="#333">expires_at</text>
+  <rect x="90" y="530" width="220" height="138" rx="3" fill="none" stroke="#2C5282" stroke-width="2"/>
+
+  <!-- ===== ENTITY: DAILY_CHECKIN ===== -->
+  <rect x="420" y="180" width="220" height="28" rx="3 3 0 0" fill="#276749" filter="url(#shadow)"/>
+  <text x="530" y="199" text-anchor="middle" font-size="13" font-weight="bold" fill="white">DAILY_CHECKIN</text>
+  <rect x="420" y="208" width="220" height="20" fill="#2F855A"/>
+  <text x="432" y="222" font-size="9" fill="#FFD700" font-weight="bold">PK  id_checkin</text>
+  <rect x="420" y="228" width="220" height="18" fill="white"/>
+  <text x="432" y="240" font-size="9" fill="#333">mood_label</text>
+  <rect x="420" y="246" width="220" height="18" fill="#F7FAFC"/>
+  <text x="432" y="258" font-size="9" fill="#333">perasaan</text>
+  <rect x="420" y="264" width="220" height="18" fill="white"/>
+  <text x="432" y="276" font-size="9" fill="#333">emosi_kode</text>
+  <rect x="420" y="282" width="220" height="18" fill="#F7FAFC"/>
+  <text x="432" y="294" font-size="9" fill="#333">recorded_at</text>
+  <rect x="420" y="300" width="220" height="18" fill="white"/>
+  <text x="432" y="312" font-size="9" fill="#333">created_at</text>
+  <rect x="420" y="180" width="220" height="138" rx="3" fill="none" stroke="#276749" stroke-width="2"/>
+
+  <!-- ===== ENTITY: JOURNAL ===== -->
+  <rect x="420" y="430" width="220" height="28" rx="3 3 0 0" fill="#744210" filter="url(#shadow)"/>
+  <text x="530" y="449" text-anchor="middle" font-size="13" font-weight="bold" fill="white">JOURNAL</text>
+  <rect x="420" y="458" width="220" height="20" fill="#92400E"/>
+  <text x="432" y="472" font-size="9" fill="#FFD700" font-weight="bold">PK  id_journal</text>
+  <rect x="420" y="478" width="220" height="18" fill="white"/>
+  <text x="432" y="490" font-size="9" fill="#333">content  &#x1F512;</text>
+  <rect x="420" y="496" width="220" height="18" fill="#F7FAFC"/>
+  <text x="432" y="508" font-size="9" fill="#333">ai_level</text>
+  <rect x="420" y="514" width="220" height="18" fill="white"/>
+  <text x="432" y="526" font-size="9" fill="#333">ai_label</text>
+  <rect x="420" y="532" width="220" height="18" fill="#F7FAFC"/>
+  <text x="432" y="544" font-size="9" fill="#333">ai_confidence</text>
+  <rect x="420" y="550" width="220" height="18" fill="white"/>
+  <text x="432" y="562" font-size="9" fill="#333">ai_red_flag</text>
+  <rect x="420" y="568" width="220" height="18" fill="#F7FAFC"/>
+  <text x="432" y="580" font-size="9" fill="#333">created_at</text>
+  <rect x="420" y="430" width="220" height="156" rx="3" fill="none" stroke="#744210" stroke-width="2"/>
+
+  <!-- ===== ENTITY: NOTIFICATION ===== -->
+  <rect x="420" y="700" width="220" height="28" rx="3 3 0 0" fill="#1A535C" filter="url(#shadow)"/>
+  <text x="530" y="719" text-anchor="middle" font-size="13" font-weight="bold" fill="white">NOTIFICATION</text>
+  <rect x="420" y="728" width="220" height="20" fill="#234E52"/>
+  <text x="432" y="742" font-size="9" fill="#FFD700" font-weight="bold">PK  id_notification</text>
+  <rect x="420" y="748" width="220" height="18" fill="white"/>
+  <text x="432" y="760" font-size="9" fill="#333">pesan</text>
+  <rect x="420" y="766" width="220" height="18" fill="#F7FAFC"/>
+  <text x="432" y="778" font-size="9" fill="#333">status</text>
+  <rect x="420" y="784" width="220" height="18" fill="white"/>
+  <text x="432" y="796" font-size="9" fill="#333">created_at</text>
+  <rect x="420" y="700" width="220" height="102" rx="3" fill="none" stroke="#1A535C" stroke-width="2"/>
+
+  <!-- ===== ENTITY: MOOD (log) ===== -->
+  <rect x="760" y="180" width="220" height="28" rx="3 3 0 0" fill="#2D3748" filter="url(#shadow)"/>
+  <text x="870" y="199" text-anchor="middle" font-size="13" font-weight="bold" fill="white">MOOD</text>
+  <rect x="760" y="208" width="220" height="20" fill="#4A5568"/>
+  <text x="772" y="222" font-size="9" fill="#FFD700" font-weight="bold">PK  id_mood</text>
+  <rect x="760" y="228" width="220" height="18" fill="white"/>
+  <text x="772" y="240" font-size="9" fill="#333">mood_name</text>
+  <rect x="760" y="246" width="220" height="18" fill="#F7FAFC"/>
+  <text x="772" y="258" font-size="9" fill="#333">mood_code</text>
+  <rect x="760" y="264" width="220" height="18" fill="white"/>
+  <text x="772" y="276" font-size="9" fill="#333">recorded_at</text>
+  <rect x="760" y="282" width="220" height="18" fill="#F7FAFC"/>
+  <text x="772" y="294" font-size="9" fill="#333">created_at</text>
+  <rect x="760" y="180" width="220" height="120" rx="3" fill="none" stroke="#2D3748" stroke-width="2"/>
+
+  <!-- ===== ENTITY: FEELING (log) ===== -->
+  <rect x="760" y="420" width="220" height="28" rx="3 3 0 0" fill="#44337A" filter="url(#shadow)"/>
+  <text x="870" y="439" text-anchor="middle" font-size="13" font-weight="bold" fill="white">FEELING</text>
+  <rect x="760" y="448" width="220" height="20" fill="#553C9A"/>
+  <text x="772" y="462" font-size="9" fill="#FFD700" font-weight="bold">PK  id_feeling</text>
+  <rect x="760" y="468" width="220" height="18" fill="white"/>
+  <text x="772" y="480" font-size="9" fill="#333">feeling_name</text>
+  <rect x="760" y="486" width="220" height="18" fill="#F7FAFC"/>
+  <text x="772" y="498" font-size="9" fill="#333">feeling_code</text>
+  <rect x="760" y="504" width="220" height="18" fill="white"/>
+  <text x="772" y="516" font-size="9" fill="#333">recorded_at</text>
+  <rect x="760" y="522" width="220" height="18" fill="#F7FAFC"/>
+  <text x="772" y="534" font-size="9" fill="#333">created_at</text>
+  <rect x="760" y="420" width="220" height="120" rx="3" fill="none" stroke="#44337A" stroke-width="2"/>
+
+  <!-- ===== ENTITY: MOOD_CATEGORY ===== -->
+  <rect x="1100" y="180" width="240" height="28" rx="3 3 0 0" fill="#553C9A" filter="url(#shadow)"/>
+  <text x="1220" y="199" text-anchor="middle" font-size="13" font-weight="bold" fill="white">MOOD_CATEGORY</text>
+  <rect x="1100" y="208" width="240" height="20" fill="#6B46C1"/>
+  <text x="1112" y="222" font-size="9" fill="#FFD700" font-weight="bold">PK  id_mood_category</text>
+  <rect x="1100" y="228" width="240" height="18" fill="white"/>
+  <text x="1112" y="240" font-size="9" fill="#333">name</text>
+  <rect x="1100" y="246" width="240" height="18" fill="#F7FAFC"/>
+  <text x="1112" y="258" font-size="9" fill="#333">label</text>
+  <rect x="1100" y="264" width="240" height="18" fill="white"/>
+  <text x="1112" y="276" font-size="9" fill="#333">description</text>
+  <rect x="1100" y="282" width="240" height="18" fill="#F7FAFC"/>
+  <text x="1112" y="294" font-size="9" fill="#333">icon_name</text>
+  <rect x="1100" y="300" width="240" height="18" fill="white"/>
+  <text x="1112" y="312" font-size="9" fill="#333">gradient_start</text>
+  <rect x="1100" y="318" width="240" height="18" fill="#F7FAFC"/>
+  <text x="1112" y="330" font-size="9" fill="#333">gradient_end</text>
+  <rect x="1100" y="336" width="240" height="18" fill="white"/>
+  <text x="1112" y="348" font-size="9" fill="#333">text_color</text>
+  <rect x="1100" y="180" width="240" height="176" rx="3" fill="none" stroke="#553C9A" stroke-width="2"/>
+
+  <!-- ===== ENTITY: FEELING_CATEGORY ===== -->
+  <rect x="1100" y="450" width="240" height="28" rx="3 3 0 0" fill="#702459" filter="url(#shadow)"/>
+  <text x="1220" y="469" text-anchor="middle" font-size="13" font-weight="bold" fill="white">FEELING_CATEGORY</text>
+  <rect x="1100" y="478" width="240" height="20" fill="#97266D"/>
+  <text x="1112" y="492" font-size="9" fill="#FFD700" font-weight="bold">PK  id_feeling_category</text>
+  <rect x="1100" y="498" width="240" height="18" fill="white"/>
+  <text x="1112" y="510" font-size="9" fill="#333">name</text>
+  <rect x="1100" y="516" width="240" height="18" fill="#F7FAFC"/>
+  <text x="1112" y="528" font-size="9" fill="#333">description</text>
+  <rect x="1100" y="450" width="240" height="86" rx="3" fill="none" stroke="#702459" stroke-width="2"/>
+
+  <!-- ===== ENTITY: MODULE ===== -->
+  <rect x="1100" y="650" width="240" height="28" rx="3 3 0 0" fill="#C05621" filter="url(#shadow)"/>
+  <text x="1220" y="669" text-anchor="middle" font-size="13" font-weight="bold" fill="white">MODULE</text>
+  <rect x="1100" y="678" width="240" height="20" fill="#DD6B20"/>
+  <text x="1112" y="692" font-size="9" fill="#FFD700" font-weight="bold">PK  id_module</text>
+  <rect x="1100" y="698" width="240" height="18" fill="white"/>
+  <text x="1112" y="710" font-size="9" fill="#333">title</text>
+  <rect x="1100" y="716" width="240" height="18" fill="#F7FAFC"/>
+  <text x="1112" y="728" font-size="9" fill="#333">subtitle</text>
+  <rect x="1100" y="734" width="240" height="18" fill="white"/>
+  <text x="1112" y="746" font-size="9" fill="#333">description</text>
+  <rect x="1100" y="752" width="240" height="18" fill="#F7FAFC"/>
+  <text x="1112" y="764" font-size="9" fill="#333">content</text>
+  <rect x="1100" y="770" width="240" height="18" fill="white"/>
+  <text x="1112" y="782" font-size="9" fill="#333">icon</text>
+  <rect x="1100" y="788" width="240" height="18" fill="#F7FAFC"/>
+  <text x="1112" y="800" font-size="9" fill="#333">points</text>
+  <rect x="1100" y="806" width="240" height="18" fill="white"/>
+  <text x="1112" y="818" font-size="9" fill="#333">category</text>
+  <rect x="1100" y="824" width="240" height="18" fill="#F7FAFC"/>
+  <text x="1112" y="836" font-size="9" fill="#333">color</text>
+  <rect x="1100" y="842" width="240" height="18" fill="white"/>
+  <text x="1112" y="854" font-size="9" fill="#333">status</text>
+  <rect x="1100" y="860" width="240" height="18" fill="#F7FAFC"/>
+  <text x="1112" y="872" font-size="9" fill="#333">content_url</text>
+  <rect x="1100" y="878" width="240" height="18" fill="white"/>
+  <text x="1112" y="890" font-size="9" fill="#333">thumbnail_url</text>
+  <rect x="1100" y="650" width="240" height="246" rx="3" fill="none" stroke="#C05621" stroke-width="2"/>
+
+  <!-- ============================================================ -->
+  <!-- ===== RELATIONSHIPS (Crow's Foot One-to-Many) ===== -->
+  <!-- ============================================================ -->
+
+  <!-- 1. USER (1) ──────── DAILY_CHECKIN (N) -->
+  <!-- One side at USER right (310, 310), Many side at DAILY_CHECKIN left (420, 260) -->
+  <line x1="314" y1="310" x2="416" y2="260"
+        stroke="#34495E" stroke-width="1.8"
+        marker-start="url(#cf-one-rev)" marker-end="url(#cf-many)"/>
+  <!-- Relationship label badge -->
+  <rect x="330" y="272" width="76" height="16" rx="8" fill="#276749"/>
+  <text x="368" y="284" text-anchor="middle" font-size="9" fill="white" font-weight="bold">memiliki</text>
+  <!-- Cardinality labels -->
+  <text x="320" y="308" font-size="10" fill="#34495E" font-weight="bold">1</text>
+  <text x="406" y="258" font-size="10" fill="#34495E" font-weight="bold">N</text>
+
+  <!-- 2. USER (1) ──────── JOURNAL (N) -->
+  <!-- One side at USER right (310, 350), Many side at JOURNAL left (420, 500) -->
+  <line x1="314" y1="370" x2="416" y2="490"
+        stroke="#34495E" stroke-width="1.8"
+        marker-start="url(#cf-one-rev)" marker-end="url(#cf-many)"/>
+  <rect x="330" y="412" width="60" height="16" rx="8" fill="#744210"/>
+  <text x="360" y="424" text-anchor="middle" font-size="9" fill="white" font-weight="bold">menulis</text>
+  <text x="320" y="368" font-size="10" fill="#34495E" font-weight="bold">1</text>
+  <text x="406" y="492" font-size="10" fill="#34495E" font-weight="bold">N</text>
+
+  <!-- 3. USER (1) ──────── ACCESS_TOKEN (N) -->
+  <!-- One side at USER bottom (200, 462), Many side at ACCESS_TOKEN top (200, 530) -->
+  <line x1="200" y1="464" x2="200" y2="526"
+        stroke="#34495E" stroke-width="1.8"
+        marker-start="url(#cf-one)" marker-end="url(#cf-many)"/>
+  <rect x="156" y="487" width="90" height="16" rx="8" fill="#2C5282"/>
+  <text x="201" y="499" text-anchor="middle" font-size="9" fill="white" font-weight="bold">mempunyai</text>
+  <text x="188" y="475" font-size="10" fill="#34495E" font-weight="bold">1</text>
+  <text x="188" y="524" font-size="10" fill="#34495E" font-weight="bold">N</text>
+
+  <!-- 4. USER (1) ──────── MOOD (N) -->
+  <!-- Horizontal from USER right → corner → MOOD left -->
+  <!-- Route: (310,230) → (760,230) -->
+  <polyline points="314,230 760,230"
+        stroke="#34495E" stroke-width="1.8" fill="none"
+        marker-start="url(#cf-one-rev)" marker-end="url(#cf-many)"/>
+  <rect x="490" y="218" width="62" height="16" rx="8" fill="#2D3748"/>
+  <text x="521" y="230" text-anchor="middle" font-size="9" fill="white" font-weight="bold">mencatat</text>
+  <text x="320" y="228" font-size="10" fill="#34495E" font-weight="bold">1</text>
+  <text x="750" y="228" font-size="10" fill="#34495E" font-weight="bold">N</text>
+
+  <!-- 5. USER (1) ──────── FEELING (N) -->
+  <!-- Route: (310,420) right → jump over → (760,480) -->
+  <polyline points="314,400 700,400 700,480 756,480"
+        stroke="#34495E" stroke-width="1.8" fill="none"
+        marker-start="url(#cf-one-rev)" marker-end="url(#cf-many)"/>
+  <rect x="480" y="388" width="68" height="16" rx="8" fill="#44337A"/>
+  <text x="514" y="400" text-anchor="middle" font-size="9" fill="white" font-weight="bold">merasakan</text>
+  <text x="320" y="398" font-size="10" fill="#34495E" font-weight="bold">1</text>
+  <text x="748" y="478" font-size="10" fill="#34495E" font-weight="bold">N</text>
+
+  <!-- 6. USER (1) ──────── NOTIFICATION (N) -->
+  <!-- Vertical from USER bottom → right elbow → NOTIFICATION left  -->
+  <polyline points="200,464 200,751 416,751"
+        stroke="#34495E" stroke-width="1.8" fill="none"
+        marker-start="url(#cf-one)" marker-end="url(#cf-many)"/>
+  <rect x="272" y="739" width="90" height="16" rx="8" fill="#1A535C"/>
+  <text x="317" y="751" text-anchor="middle" font-size="9" fill="white" font-weight="bold">menerima</text>
+  <text x="188" y="475" font-size="10" fill="#34495E" font-weight="bold">1</text>
+  <text x="406" y="749" font-size="10" fill="#34495E" font-weight="bold">N</text>
+
+  <!-- 7. MOOD_CATEGORY (1) ──────── MOOD (N) -->
+  <!-- From MOOD_CATEGORY left (1100,268) → MOOD right (980,240) -->
+  <line x1="1096" y1="268" x2="984" y2="240"
+        stroke="#34495E" stroke-width="1.8"
+        marker-start="url(#cf-one)" marker-end="url(#cf-many-rev)"/>
+  <rect x="1005" y="246" width="80" height="16" rx="8" fill="#553C9A"/>
+  <text x="1045" y="258" text-anchor="middle" font-size="9" fill="white" font-weight="bold">mengkategori</text>
+  <text x="1088" y="266" font-size="10" fill="#34495E" font-weight="bold">1</text>
+  <text x="984" y="238" font-size="10" fill="#34495E" font-weight="bold">N</text>
+
+  <!-- 8. MOOD_CATEGORY (1) ──────── FEELING_CATEGORY (N) -->
+  <!-- Vertical from MOOD_CATEGORY bottom (1220,356) → FEELING_CATEGORY top (1220,450) -->
+  <line x1="1220" y1="358" x2="1220" y2="446"
+        stroke="#34495E" stroke-width="1.8"
+        marker-start="url(#cf-one)" marker-end="url(#cf-many)"/>
+  <rect x="1156" y="394" width="128" height="16" rx="8" fill="#702459"/>
+  <text x="1220" y="406" text-anchor="middle" font-size="9" fill="white" font-weight="bold">mempunyai sub</text>
+  <text x="1208" y="370" font-size="10" fill="#34495E" font-weight="bold">1</text>
+  <text x="1208" y="444" font-size="10" fill="#34495E" font-weight="bold">N</text>
+
+  <!-- 9. FEELING_CATEGORY (1) ──────── FEELING (N) -->
+  <!-- From FEELING_CATEGORY left (1100,503) → FEELING right (984,480) -->
+  <line x1="1096" y1="503" x2="984" y2="480"
+        stroke="#34495E" stroke-width="1.8"
+        marker-start="url(#cf-one)" marker-end="url(#cf-many-rev)"/>
+  <rect x="1000" y="483" width="88" height="16" rx="8" fill="#702459"/>
+  <text x="1044" y="495" text-anchor="middle" font-size="9" fill="white" font-weight="bold">mengkategori</text>
+  <text x="1088" y="502" font-size="10" fill="#34495E" font-weight="bold">1</text>
+  <text x="984" y="478" font-size="10" fill="#34495E" font-weight="bold">N</text>
+
+  <!-- 10. MOOD_CATEGORY (1) ──────── DAILY_CHECKIN (N) [soft concept] -->
+  <polyline points="1100,222 700,222 640,265"
+        stroke="#9B59B6" stroke-width="1.3" fill="none" stroke-dasharray="7,4"
+        marker-end="url(#cf-many)"/>
+  <text x="850" y="214" text-anchor="middle" font-size="8" fill="#9B59B6" font-style="italic">referensi mood</text>
+
+  <!-- 11. MODULE standalone note (no direct FK, accessed independently) -->
+  <!-- Dashed boundary note from USER to MODULE -->
+  <polyline points="310,426 390,426 390,900 1096,900 1096,896"
+        stroke="#9B59B6" stroke-width="1.3" fill="none" stroke-dasharray="7,4"
+        marker-end="url(#cf-many)"/>
+  <rect x="640" y="886" width="140" height="16" rx="8" fill="#9B59B6"/>
+  <text x="710" y="898" text-anchor="middle" font-size="9" fill="white" font-style="italic">akses &amp; selesaikan</text>
+  <text x="318" y="424" font-size="10" fill="#9B59B6" font-weight="bold">1</text>
+  <text x="1086" y="895" font-size="10" fill="#9B59B6" font-weight="bold">N</text>
+
+  <!-- ============================================================ -->
+  <!-- ===== NOTE BOXES ===== -->
+  <!-- ============================================================ -->
+
+  <!-- Note: Journal content encrypted -->
+  <rect x="420" y="610" width="220" height="32" rx="4" fill="#FFFBEB" stroke="#F6AD55" stroke-width="1"/>
+  <text x="430" y="624" font-size="8" fill="#744210">📝 content dienkripsi dengan</text>
+  <text x="430" y="636" font-size="8" fill="#744210">Laravel Crypt sebelum disimpan</text>
+
+  <!-- Note: Module no direct FK -->
+  <rect x="1100" y="912" width="240" height="32" rx="4" fill="#FFFBEB" stroke="#F6AD55" stroke-width="1"/>
+  <text x="1110" y="926" font-size="8" fill="#744210">⚡ Akses module dicatat di</text>
+  <text x="1110" y="938" font-size="8" fill="#744210">users.completed_modules (array)</text>
+
+  <!-- Note: Soft references (MongoDB) -->
+  <rect x="760" y="660" width="290" height="56" rx="4" fill="#EBF8FF" stroke="#63B3ED" stroke-width="1"/>
+  <text x="905" y="678" text-anchor="middle" font-size="10" font-weight="bold" fill="#1A365D">ℹ️ Catatan MongoDB</text>
+  <text x="772" y="694" font-size="8" fill="#2C5282">• Semua relasi berupa soft-reference (tidak ada</text>
+  <text x="772" y="706" font-size="8" fill="#2C5282">  FK enforcement di level database)</text>
+  <text x="772" y="718" font-size="8" fill="#2C5282">• Referensi via: _id, user_id, nim, mood_name</text>
+
+  <!-- ===== FOOTER ===== -->
+  <rect x="0" y="1048" width="1500" height="32" fill="#1A3A5C"/>
+  <text x="750" y="1069" text-anchor="middle" font-size="11" fill="#90A8C3">
+    EMORA App — Conceptual Data Model (CDM)  |  Relasi: One-to-Many (Crow's Foot)  |  Backend: Laravel 11 + MongoDB Atlas  |  © 2026
+  </text>
+
+</svg>
