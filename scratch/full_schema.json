@@ -1,0 +1,1139 @@
+{
+    "daily_checkins": {
+        "count": 162,
+        "sampled": 100,
+        "fields": [
+            {
+                "name": "_id",
+                "types": [
+                    "ObjectId"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": true,
+                "is_fk": false
+            },
+            {
+                "name": "created_at",
+                "types": [
+                    "DateTime"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "feeling_id",
+                "types": [
+                    "Integer",
+                    "null"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": true
+            },
+            {
+                "name": "mood_id",
+                "types": [
+                    "Integer"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": true
+            },
+            {
+                "name": "mood_label",
+                "types": [
+                    "String"
+                ],
+                "nullable": true,
+                "occurrence": 91,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "nim",
+                "types": [
+                    "String",
+                    "null"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": true
+            },
+            {
+                "name": "perasaan",
+                "types": [
+                    "null",
+                    "String"
+                ],
+                "nullable": true,
+                "occurrence": 91,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "recorded_at",
+                "types": [
+                    "DateTime",
+                    "null"
+                ],
+                "nullable": true,
+                "occurrence": 97,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "updated_at",
+                "types": [
+                    "DateTime"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "user_id",
+                "types": [
+                    "String",
+                    "null"
+                ],
+                "nullable": true,
+                "occurrence": 97,
+                "is_pk": false,
+                "is_fk": true
+            },
+            {
+                "name": "username",
+                "types": [
+                    "String",
+                    "null"
+                ],
+                "nullable": true,
+                "occurrence": 97,
+                "is_pk": false,
+                "is_fk": false
+            }
+        ],
+        "sample_doc": {
+            "_id": "ObjectId(69e8d3aa71a960e58f0fdbdf)",
+            "nim": "11423045",
+            "mood_id": "4",
+            "feeling_id": "11",
+            "created_at": "2026-04-20 13:56:58",
+            "updated_at": "2026-04-22 13:56:58"
+        }
+    },
+    "feelings": {
+        "count": 41,
+        "sampled": 41,
+        "fields": [
+            {
+                "name": "_id",
+                "types": [
+                    "ObjectId"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": true,
+                "is_fk": false
+            },
+            {
+                "name": "created_at",
+                "types": [
+                    "DateTime"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "feeling_code",
+                "types": [
+                    "String"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "feeling_id",
+                "types": [
+                    "Integer"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": true
+            },
+            {
+                "name": "feeling_name",
+                "types": [
+                    "String"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "mood_id",
+                "types": [
+                    "String"
+                ],
+                "nullable": true,
+                "occurrence": 32,
+                "is_pk": false,
+                "is_fk": true
+            },
+            {
+                "name": "nim",
+                "types": [
+                    "String"
+                ],
+                "nullable": true,
+                "occurrence": 32,
+                "is_pk": false,
+                "is_fk": true
+            },
+            {
+                "name": "recorded_at",
+                "types": [
+                    "DateTime"
+                ],
+                "nullable": true,
+                "occurrence": 32,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "updated_at",
+                "types": [
+                    "DateTime"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "user_id",
+                "types": [
+                    "String"
+                ],
+                "nullable": true,
+                "occurrence": 32,
+                "is_pk": false,
+                "is_fk": true
+            },
+            {
+                "name": "username",
+                "types": [
+                    "String"
+                ],
+                "nullable": true,
+                "occurrence": 32,
+                "is_pk": false,
+                "is_fk": false
+            }
+        ],
+        "sample_doc": {
+            "_id": "ObjectId(69e96f014b68dc909a0ec589)",
+            "feeling_id": "1",
+            "feeling_name": "Gembira",
+            "feeling_code": "GEMBIRA",
+            "updated_at": "2026-04-23 00:59:45",
+            "created_at": "2026-04-23 00:59:45"
+        }
+    },
+    "journal_texts": {
+        "count": 71,
+        "sampled": 71,
+        "fields": [
+            {
+                "name": "_id",
+                "types": [
+                    "ObjectId"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": true,
+                "is_fk": false
+            },
+            {
+                "name": "ai_label",
+                "types": [
+                    "String"
+                ],
+                "nullable": true,
+                "occurrence": 37,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "ai_level",
+                "types": [
+                    "Integer"
+                ],
+                "nullable": true,
+                "occurrence": 37,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "created_at",
+                "types": [
+                    "DateTime"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "description",
+                "types": [
+                    "String"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "nim",
+                "types": [
+                    "String"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": true
+            },
+            {
+                "name": "updated_at",
+                "types": [
+                    "DateTime"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            }
+        ],
+        "sample_doc": {
+            "_id": "ObjectId(69e8d3aa71a960e58f0fdbe2)",
+            "nim": "11423045",
+            "description": "Hari ini merasa sangat cemas karena deadline PKM dan tugas akhir (TA) makin d...",
+            "created_at": "2026-04-19 13:56:58",
+            "updated_at": "2026-04-22 13:56:58"
+        }
+    },
+    "migrations": {
+        "count": 0,
+        "sampled": 0,
+        "fields": [],
+        "sample_doc": []
+    },
+    "modules": {
+        "count": 5,
+        "sampled": 5,
+        "fields": [
+            {
+                "name": "_id",
+                "types": [
+                    "ObjectId"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": true,
+                "is_fk": false
+            },
+            {
+                "name": "content_url",
+                "types": [
+                    "String"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "created_at",
+                "types": [
+                    "DateTime"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "description",
+                "types": [
+                    "String"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "kategori",
+                "types": [
+                    "String",
+                    "null"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "reward_point",
+                "types": [
+                    "String"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "status",
+                "types": [
+                    "String",
+                    "Boolean"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "target_audiens",
+                "types": [
+                    "String"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "thumbnail",
+                "types": [
+                    "String"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "title",
+                "types": [
+                    "String"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "updated_at",
+                "types": [
+                    "DateTime"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            }
+        ],
+        "sample_doc": {
+            "_id": "ObjectId(6a21afb2a8f1db016a0016e2)",
+            "title": "Kesehatan mental dan penguatannya untuk remaja",
+            "description": "Masa remaja dan transisi dewasa bukan cuma soal tugas yang menumpuk atau penc...",
+            "content_url": "https:\/\/res.cloudinary.com\/drj5rrhw1\/raw\/upload\/v1780625182\/modules\/content\/u...",
+            "reward_point": "50",
+            "status": "1",
+            "kategori": "Kesehatan Mental",
+            "target_audiens": "Semua Mahasiswa",
+            "thumbnail": "https:\/\/res.cloudinary.com\/drj5rrhw1\/image\/upload\/v1780592556\/modules\/thumbna...",
+            "updated_at": "2026-06-05 02:06:24",
+            "created_at": "2026-06-04 17:02:42"
+        }
+    },
+    "moods": {
+        "count": 11,
+        "sampled": 11,
+        "fields": [
+            {
+                "name": "_id",
+                "types": [
+                    "ObjectId"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": true,
+                "is_fk": false
+            },
+            {
+                "name": "created_at",
+                "types": [
+                    "DateTime"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "mood_code",
+                "types": [
+                    "String"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "mood_id",
+                "types": [
+                    "Integer"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": true
+            },
+            {
+                "name": "mood_name",
+                "types": [
+                    "String"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "nim",
+                "types": [
+                    "String"
+                ],
+                "nullable": true,
+                "occurrence": 45,
+                "is_pk": false,
+                "is_fk": true
+            },
+            {
+                "name": "recorded_at",
+                "types": [
+                    "DateTime"
+                ],
+                "nullable": true,
+                "occurrence": 45,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "updated_at",
+                "types": [
+                    "DateTime"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "user_id",
+                "types": [
+                    "String"
+                ],
+                "nullable": true,
+                "occurrence": 45,
+                "is_pk": false,
+                "is_fk": true
+            },
+            {
+                "name": "username",
+                "types": [
+                    "String"
+                ],
+                "nullable": true,
+                "occurrence": 45,
+                "is_pk": false,
+                "is_fk": false
+            }
+        ],
+        "sample_doc": {
+            "_id": "ObjectId(69e96f004b68dc909a0ec582)",
+            "mood_id": "1",
+            "mood_name": "Senang",
+            "mood_code": "SENANG",
+            "updated_at": "2026-04-23 00:59:43",
+            "created_at": "2026-04-23 00:59:43"
+        }
+    },
+    "notifications": {
+        "count": 19,
+        "sampled": 19,
+        "fields": [
+            {
+                "name": "_id",
+                "types": [
+                    "ObjectId"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": true,
+                "is_fk": false
+            },
+            {
+                "name": "created_at",
+                "types": [
+                    "DateTime"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "nim",
+                "types": [
+                    "String"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": true
+            },
+            {
+                "name": "pesan",
+                "types": [
+                    "String"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "status",
+                "types": [
+                    "String"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "updated_at",
+                "types": [
+                    "DateTime"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            }
+        ],
+        "sample_doc": {
+            "_id": "ObjectId(6a114101547320acbe09b502)",
+            "nim": "11423044",
+            "pesan": "silahkan konsultasi",
+            "status": "sudah",
+            "updated_at": "2026-05-23 06:47:52",
+            "created_at": "2026-05-23 05:54:08"
+        }
+    },
+    "password_reset_tokens": {
+        "count": 0,
+        "sampled": 0,
+        "fields": [],
+        "sample_doc": []
+    },
+    "personal_access_tokens": {
+        "count": 284,
+        "sampled": 100,
+        "fields": [
+            {
+                "name": "_id",
+                "types": [
+                    "ObjectId"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": true,
+                "is_fk": false
+            },
+            {
+                "name": "abilities",
+                "types": [
+                    "String"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "created_at",
+                "types": [
+                    "DateTime"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "expires_at",
+                "types": [
+                    "null"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "last_used_at",
+                "types": [
+                    "DateTime"
+                ],
+                "nullable": true,
+                "occurrence": 65,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "name",
+                "types": [
+                    "String"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "token",
+                "types": [
+                    "String"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "tokenable_id",
+                "types": [
+                    "String"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": true
+            },
+            {
+                "name": "tokenable_type",
+                "types": [
+                    "String"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "updated_at",
+                "types": [
+                    "DateTime"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            }
+        ],
+        "sample_doc": {
+            "_id": "ObjectId(69eb1a8bf603b7a6d900a003)",
+            "name": "auth_token",
+            "token": "e0d5016a503de730fce08906788404e65732616c7d01a7af7f442e328902c77d",
+            "abilities": "[\"*\"]",
+            "expires_at": "null",
+            "tokenable_id": "69eb1a8af603b7a6d900a002",
+            "tokenable_type": "App\\Models\\User",
+            "updated_at": "2026-04-24 07:23:55",
+            "created_at": "2026-04-24 07:23:55"
+        }
+    },
+    "sessions": {
+        "count": 1,
+        "sampled": 1,
+        "fields": [
+            {
+                "name": "_id",
+                "types": [
+                    "String"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": true,
+                "is_fk": false
+            },
+            {
+                "name": "ip_address",
+                "types": [
+                    "String"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "last_activity",
+                "types": [
+                    "Integer"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "payload",
+                "types": [
+                    "String"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "user_agent",
+                "types": [
+                    "String"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "user_id",
+                "types": [
+                    "null"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": true
+            }
+        ],
+        "sample_doc": {
+            "_id": "FZLVR2GYNhjtZP7VETLSFSLjPSZXZnJcBwnxsEmn",
+            "payload": "YTozOntzOjY6Il90b2tlbiI7czo0MDoiRUpmbHZYdk1PNXh0Qk5IV08ySEFTMHVrblZCZE5XUVJoU...",
+            "last_activity": "1777090318",
+            "user_id": "null",
+            "ip_address": "127.0.0.1",
+            "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gec..."
+        }
+    },
+    "users": {
+        "count": 37,
+        "sampled": 37,
+        "fields": [
+            {
+                "name": "_id",
+                "types": [
+                    "ObjectId"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": true,
+                "is_fk": false
+            },
+            {
+                "name": "active_theme",
+                "types": [
+                    "String"
+                ],
+                "nullable": true,
+                "occurrence": 11,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "angkatan",
+                "types": [
+                    "Integer",
+                    "null"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "asrama",
+                "types": [
+                    "String",
+                    "null"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "completed_modules",
+                "types": [
+                    "Array"
+                ],
+                "nullable": true,
+                "occurrence": 11,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "created_at",
+                "types": [
+                    "DateTime"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "email",
+                "types": [
+                    "String"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "jenis_kelamin",
+                "types": [
+                    "String"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "mental_confidence",
+                "types": [
+                    "Double",
+                    "Integer"
+                ],
+                "nullable": true,
+                "occurrence": 78,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "mental_insight",
+                "types": [
+                    "String"
+                ],
+                "nullable": true,
+                "occurrence": 14,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "mental_label",
+                "types": [
+                    "String"
+                ],
+                "nullable": true,
+                "occurrence": 78,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "mental_level",
+                "types": [
+                    "Integer",
+                    "String"
+                ],
+                "nullable": true,
+                "occurrence": 78,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "mental_notif_read",
+                "types": [
+                    "Boolean"
+                ],
+                "nullable": true,
+                "occurrence": 5,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "mental_red_flag",
+                "types": [
+                    "String",
+                    "null"
+                ],
+                "nullable": true,
+                "occurrence": 78,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "mental_scanned_at",
+                "types": [
+                    "DateTime"
+                ],
+                "nullable": true,
+                "occurrence": 81,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "mental_updated_manual_at",
+                "types": [
+                    "DateTime"
+                ],
+                "nullable": true,
+                "occurrence": 8,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "name",
+                "types": [
+                    "String"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "nim",
+                "types": [
+                    "String",
+                    "null"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": true
+            },
+            {
+                "name": "password",
+                "types": [
+                    "String"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "point",
+                "types": [
+                    "Integer"
+                ],
+                "nullable": true,
+                "occurrence": 27,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "prodi",
+                "types": [
+                    "String",
+                    "null"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "purchased_themes",
+                "types": [
+                    "Array"
+                ],
+                "nullable": true,
+                "occurrence": 11,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "updated_at",
+                "types": [
+                    "DateTime"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            },
+            {
+                "name": "username",
+                "types": [
+                    "String"
+                ],
+                "nullable": false,
+                "occurrence": 100,
+                "is_pk": false,
+                "is_fk": false
+            }
+        ],
+        "sample_doc": {
+            "_id": "ObjectId(69f21195d2831e7c4f00b2c2)",
+            "username": "if423044",
+            "name": "Nathanael T. J. Tampubolon",
+            "password": "$2y$12$1uXyNOF1V8z5crcrY.MlROa4AZWr6R4nPXvE\/ITYFjuVAH1MM2Kb.",
+            "nim": "11423044",
+            "email": "if423044@students.del.ac.id",
+            "prodi": "D IV Sarjana Terapan Teknologi Rekayasa Perangkat Lunak",
+            "angkatan": "2023",
+            "asrama": "Marie Curie",
+            "jenis_kelamin": "Laki-laki",
+            "updated_at": "2026-06-15 18:45:20",
+            "created_at": "2026-04-29 14:11:33",
+            "point": "996449",
+            "mental_confidence": "100",
+            "mental_label": "Level 3 (Krisis \/ Butuh Penanganan Cepat)",
+            "mental_level": "3",
+            "mental_red_flag": "mau mati, bunuh diri",
+            "mental_scanned_at": "2026-06-15 17:05:05",
+            "active_theme": "black",
+            "purchased_themes": "[Array]",
+            "mental_insight": "Mahasiswa dalam jurnal ini mengungkapkan berbagai emosi dan pengalaman, mulai...",
+            "completed_modules": "[Array]",
+            "mental_notif_read": "true"
+        }
+    }
+}
